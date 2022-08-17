@@ -1,0 +1,10 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Template files
+template/
+
+vuetify-project/
