@@ -8,10 +8,11 @@ import minimist from 'minimist'
 import prompts from 'prompts'
 
 import { resolve, join } from 'path'
-import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'fs'
 import { renderTemplate } from './utils'
 
-import type {Answers} from 'prompts'
+// Types
+import type { Answers } from 'prompts'
 
 async function run () {
   const cwd = process.cwd()
@@ -23,35 +24,13 @@ async function run () {
     boolean: true,
   })
 
-  console.log('ARGV: ', argv._[0])
-
-  /**
-   * Args:
-   *  --force -> force overwrite
-   *  --typescript, --ts => typescript project
-   *  --
-   */
-
-  // needsTypeScript?: boolean
-  // needsJsx?: boolean
-  // needsRouter?: boolean
-  // needsPinia?: boolean
-  // needsEslint?: boolean
-  // needsPrettier?: boolean
-
-  // needsVitest?: boolean
-  // needsCypress?: boolean
-
-  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useEslint' | 'useJsx' | 'useTypeScript' | 'usePinia' | 'useRouter'
+  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'useRouter'
 
   let context: Answers<PromptQuestions> = {
     projectName: undefined,
     canOverwrite: undefined,
-    useEslint: undefined,
-    useJsx: undefined,
-    usePinia: undefined,
-    useRouter: undefined,
-    useTypeScript: undefined,
+    useTypeScript: false,
+    useRouter: false,
   }
 
   try {
@@ -80,12 +59,12 @@ async function run () {
           initial: false,
           type: (_, { projectName }) => {
             const projectPath = join(cwd, projectName)
-            console.log(existsSync(projectPath))
+
             return (
               !existsSync(projectPath) || readdirSync(projectPath).length === 0
             ) ? null : 'toggle'
           },
-          message: prev => `Create project at ${resolve(cwd, prev)}?`,
+          message: prev => `The project path: ${resolve(cwd, prev)} already exists, would you like to overwrite this directory?`,
         },
         {
           name: 'useTypeScript',
@@ -95,26 +74,9 @@ async function run () {
           inactive: 'No',
           initial: false,
         },
-        {
-          name: 'useJsx',
-          type: 'toggle',
-          message: 'Use Jsx?',
-          active: 'Yes',
-          inactive: 'No',
-          initial: false,
-        },
-        {
-          name: 'useRouter',
-          type: 'toggle',
-          message: 'Use Vue-Router?',
-          active: 'Yes',
-          inactive: 'No',
-          initial: false,
-        },
       ],
       {
         onCancel: () => {
-          console.error('Operation cancelled')
           throw new Error(red('✖') + ' Operation cancelled')
         },
         onSubmit: (prompt, answer, answers) => {},
@@ -122,40 +84,49 @@ async function run () {
     )
   } catch (err) {
     console.error(err)
+    process.exit()
   }
-
-  console.log(context)
 
   const {
     canOverwrite,
     projectName,
-    useEslint,
-    useJsx,
-    usePinia,
-    useRouter,
     useTypeScript,
-  } = { ...context }
+  } = context
 
-  const root = join(cwd, projectName)
+  const projectRoot = join(cwd, projectName)
 
-  if (existsSync(root)) {
+  if (canOverwrite) {
     // Clean dir
-  } else {
-    mkdirSync(root)
+    rmSync(projectRoot, { recursive: true })
   }
 
-  console.log('Generating project...')
+  mkdirSync(projectRoot)
 
-  const rootPkg = { name: projectName, version: '0.0.0' }
+  const rootPkg = { name: projectName }
 
-  writeFileSync(resolve(root, 'package.json'), JSON.stringify(rootPkg, null, 2))
+  writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify(rootPkg, null, 2))
 
   const rootTemplatePath = resolve(cwd, 'template')
-  console.log('root template path: ', rootTemplatePath)
-  console.log('CWD: ', cwd)
-  console.log('dirname: ', __dirname)
 
-  renderTemplate(resolve(rootTemplatePath, 'base'), root)
+  const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
+
+  renderTemplate(resolve(rootTemplatePath, jsOrTs, 'default'), projectRoot)
+
+  if (useStore) {
+    if (usePinia) {
+
+    } else {
+      // use Vuex
+      // render Vuex templates && merge package.json dependencies into project root dependencies
+    }
+  }
 }
 
-run().catch(e => { console.error(e) }) // process.exit(1)
+run()
+  .then(() => {
+    console.log('Project has been generated. Run `yarn` or `npm install`')
+  })
+  .catch(e => {
+    console.error(e)
+    process.exit()
+  })

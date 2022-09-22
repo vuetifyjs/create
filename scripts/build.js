@@ -15,7 +15,8 @@ async function bundle () {
   await bundleMain()
 }
 
-bundle().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+bundle()
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  })

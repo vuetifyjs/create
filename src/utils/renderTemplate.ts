@@ -21,10 +21,9 @@ function renderDirectory (source: string, destination: string) {
 function renderFile (source: string, destination: string) {
   const filename = basename(source)
 
-  if (filename === 'package.json') mergePkg(source, destination)
   if (filename.startsWith('_')) destination = resolve(dirname(destination), filename.replace('_', '.'))
-  
-  copyFileSync(source, destination)
+  if (filename === 'package.json') mergePkg(source, destination)
+  else copyFileSync(source, destination)
 }
 
 function renderTemplate (source: string, destination: string) {
