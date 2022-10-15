@@ -9,7 +9,7 @@ import prompts from 'prompts'
 
 import { resolve, join } from 'path'
 import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'fs'
-import { renderTemplate } from './utils'
+import { installDependencies, renderTemplate } from './utils'
 
 // Types
 import type { Answers } from 'prompts'
@@ -24,13 +24,15 @@ async function run () {
     boolean: true,
   })
 
-  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'useRouter'
+  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'useRouter' | 'useStore' | 'useYarnOrNpm'
 
   let context: Answers<PromptQuestions> = {
     projectName: undefined,
     canOverwrite: undefined,
     useTypeScript: false,
     useRouter: false,
+    useStore: false,
+    useYarnOrNpm: false,
   }
 
   try {
@@ -74,6 +76,27 @@ async function run () {
           inactive: 'No',
           initial: false,
         },
+        {
+          name: 'useStore',
+          type: 'toggle',
+          message: 'Use Pinia?',
+          active: 'Yes',
+          inactive: 'No',
+          initial: false,
+        },
+        {
+          name: 'useYarnOrNpm',
+          type: 'multiselect',
+          message: 'Would you like to install dependencies with yarn or npm?',
+          max: 1,
+          min: 1,
+          // instructions: false,
+          choices: [
+            { title: 'npm', value: 'npm' },
+            { title: 'yarn', value: 'yarn' },
+            { title: 'none', value: null },
+          ],
+        },
       ],
       {
         onCancel: () => {
@@ -91,6 +114,8 @@ async function run () {
     canOverwrite,
     projectName,
     useTypeScript,
+    useStore,
+    useYarnOrNpm,
   } = context
 
   const projectRoot = join(cwd, projectName)
@@ -107,24 +132,24 @@ async function run () {
   writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify(rootPkg, null, 2))
 
   const rootTemplatePath = resolve(cwd, 'template')
-
   const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
 
   renderTemplate(resolve(rootTemplatePath, jsOrTs, 'default'), projectRoot)
 
   if (useStore) {
-    if (usePinia) {
+    renderTemplate(resolve(rootTemplatePath, jsOrTs, 'pinia'), projectRoot)
+  }
 
-    } else {
-      // use Vuex
-      // render Vuex templates && merge package.json dependencies into project root dependencies
-    }
+  if (useYarnOrNpm) {
+    installDependencies(projectRoot, useYarnOrNpm)
   }
 }
 
 run()
   .then(() => {
-    console.log('Project has been generated. Run `yarn` or `npm install`')
+    console.log('Discord community: https://community.vuetifyjs.com')
+    console.log('Github: https://github.com/vuetifyjs/vuetify')
+    console.log('Support Vuetify: https://github.com/sponsors/johnleider')
   })
   .catch(e => {
     console.error(e)
