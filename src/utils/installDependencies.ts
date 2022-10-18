@@ -9,7 +9,7 @@ function installDependencies(projectRoot: string, npmOrYarn: ['npm' | 'yarn']) {
   })
 
   if (spawn.error) {
-    console.error(spawn.error)
+    console.error(spawn.error) 
     process.exitCode = 1
   }
 }
