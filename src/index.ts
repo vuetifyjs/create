@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 
-import validate from 'validate-npm-package-name'
-
-import { red } from 'kolorist'
-import minimist from 'minimist'
-import prompts from 'prompts'
-
+// Node
 import { resolve, join } from 'path'
 import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'fs'
-import { installDependencies, renderTemplate } from './utils'
 
 // Types
 import type { Answers } from 'prompts'
+
+// Utils
+import { red } from 'kolorist'
+import minimist from 'minimist'
+import prompts from 'prompts'
+import validate from 'validate-npm-package-name'
+import { installDependencies, renderTemplate } from './utils'
 
 async function run () {
   const cwd = process.cwd()
@@ -71,9 +72,7 @@ async function run () {
           name: 'usePackageManager',
           type: 'select',
           message: 'Would you like to install dependencies with yarn or npm?',
-          max: 1,
-          min: 1,
-          initial: 1,
+          initial: 0,
           choices: [
             { title: 'npm', value: 'npm' },
             { title: 'yarn', value: 'yarn' },
