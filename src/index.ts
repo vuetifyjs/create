@@ -121,10 +121,8 @@ async function run () {
   console.log('◌ Generating scaffold...')
   renderTemplate(resolve(rootTemplatePath, jsOrTs, preset), projectRoot)
 
-  console.log('USE YARn OR NPM: ', useYarnOrNpm)
-
   if (useYarnOrNpm[0]) {      
-    console.log(`Installing dependencies with ${useYarnOrNpm}.`)
+    console.log(`Installing dependencies with ${useYarnOrNpm}...`)
     installDependencies(projectRoot, useYarnOrNpm)
   }
 
