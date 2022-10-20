@@ -87,8 +87,7 @@ async function run () {
       },
     )
   } catch (err) {
-    console.error(err)
-    process.exit()
+    throw err
   }
 
   const {
@@ -119,7 +118,7 @@ async function run () {
   renderTemplate(resolve(rootTemplatePath, jsOrTs, preset), projectRoot)
 
   if (usePackageManager) {      
-    console.log(`◌ Installing dependencies with ${usePackageManager}...`)
+    console.log(`\n◌ Installing dependencies with ${usePackageManager}...\n`)
     installDependencies(projectRoot, usePackageManager)
   }
 
@@ -133,6 +132,6 @@ run()
     console.log('Support Vuetify: https://github.com/sponsors/johnleider')
   })
   .catch((err) => {
-    console.error(err)
+    console.error(`${red('✖')} ${err}`)
     process.exit()
   })

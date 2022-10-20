@@ -9,8 +9,7 @@ function installDependencies(projectRoot: string, npmOrYarn: 'npm' | 'yarn') {
   })
 
   if (spawn.error) {
-    console.error(spawn.error) 
-    process.exit()
+    throw spawn.error
   }
 }
 
