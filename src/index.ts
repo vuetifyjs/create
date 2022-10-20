@@ -22,13 +22,13 @@ async function run () {
     },
   })
 
-  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'useYarnOrNpm'
+  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'usePackageManager'
 
   let context: Answers<PromptQuestions> = {
     projectName: undefined,
     canOverwrite: undefined,
     useTypeScript: argv.typescript,
-    useYarnOrNpm: undefined,
+    usePackageManager: undefined,
   }
 
   try {
@@ -41,9 +41,7 @@ async function run () {
           validate: v => {
             const { errors } = validate(String(v).trim())
 
-            return errors && errors.length ?
-              `Package ${errors[0]}` :
-              true
+            return !(errors && errors.length) || `Package ${errors[0]}`
           },
         },
         {
@@ -70,8 +68,8 @@ async function run () {
           initial: false,
         },
         {
-          name: 'useYarnOrNpm',
-          type: 'multiselect',
+          name: 'usePackageManager',
+          type: 'select',
           message: 'Would you like to install dependencies with yarn or npm?',
           max: 1,
           min: 1,
@@ -98,7 +96,7 @@ async function run () {
     canOverwrite,
     projectName,
     useTypeScript,
-    useYarnOrNpm,
+    usePackageManager,
   } = context
 
   const projectRoot = join(cwd, projectName)
@@ -121,12 +119,12 @@ async function run () {
   console.log('◌ Generating scaffold...')
   renderTemplate(resolve(rootTemplatePath, jsOrTs, preset), projectRoot)
 
-  if (useYarnOrNpm[0]) {      
-    console.log(`Installing dependencies with ${useYarnOrNpm}...`)
-    installDependencies(projectRoot, useYarnOrNpm)
+  if (usePackageManager) {      
+    console.log(`◌ Installing dependencies with ${usePackageManager}...`)
+    installDependencies(projectRoot, usePackageManager)
   }
 
-  console.log(`${projectName} has been generated at ${projectRoot}`)
+  console.log(`\n${projectName} has been generated at ${projectRoot}\n`)
 }
 
 run()
