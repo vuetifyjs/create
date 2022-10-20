@@ -3,7 +3,6 @@
 import validate from 'validate-npm-package-name'
 
 import { red } from 'kolorist'
-
 import minimist from 'minimist'
 import prompts from 'prompts'
 
@@ -21,17 +20,14 @@ async function run () {
     alias: {
       'typescript': ['ts'],
     },
-    boolean: true,
   })
 
-  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'useRouter' | 'useStore' | 'useYarnOrNpm'
+  type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'useYarnOrNpm'
 
   let context: Answers<PromptQuestions> = {
     projectName: undefined,
     canOverwrite: undefined,
-    useTypeScript: false,
-    useRouter: false,
-    useStore: false,
+    useTypeScript: argv.typescript,
     useYarnOrNpm: false,
   }
 
@@ -43,15 +39,11 @@ async function run () {
           message: 'Project name:',
           initial: 'vuetify-project',
           validate: v => {
-            const { validForNewPackages, validForOldPackages, errors, warnings } = validate(String(v).trim())
-            if (errors !== undefined || warnings !== undefined) {
-              if (warnings) console.warn('\n' + 'ERROR: ' + warnings?.join('\n'))
-              if (errors) console.error('\n' + 'ERROR: ' + errors?.join('\n'))
-              console.error('Exiting process...')
-              process.exit()
-            } else {
-              return true
-            }
+            const { errors } = validate(String(v).trim())
+
+            return errors && errors.length ?
+              `Package ${errors[0]}` :
+              true
           },
         },
         {
@@ -63,23 +55,16 @@ async function run () {
             const projectPath = join(cwd, projectName)
 
             return (
-              !existsSync(projectPath) || readdirSync(projectPath).length === 0
+              !existsSync(projectPath) ||
+              readdirSync(projectPath).length === 0
             ) ? null : 'toggle'
           },
           message: prev => `The project path: ${resolve(cwd, prev)} already exists, would you like to overwrite this directory?`,
         },
         {
           name: 'useTypeScript',
-          type: 'toggle',
+          type: context.useTypeScript ? null : 'toggle',
           message: 'Use TypeScript?',
-          active: 'Yes',
-          inactive: 'No',
-          initial: false,
-        },
-        {
-          name: 'useStore',
-          type: 'toggle',
-          message: 'Use Pinia?',
           active: 'Yes',
           inactive: 'No',
           initial: false,
@@ -90,7 +75,7 @@ async function run () {
           message: 'Would you like to install dependencies with yarn or npm?',
           max: 1,
           min: 1,
-          // instructions: false,
+          initial: 1,
           choices: [
             { title: 'npm', value: 'npm' },
             { title: 'yarn', value: 'yarn' },
@@ -102,7 +87,6 @@ async function run () {
         onCancel: () => {
           throw new Error(red('✖') + ' Operation cancelled')
         },
-        onSubmit: (prompt, answer, answers) => {},
       },
     )
   } catch (err) {
@@ -114,7 +98,6 @@ async function run () {
     canOverwrite,
     projectName,
     useTypeScript,
-    useStore,
     useYarnOrNpm,
   } = context
 
@@ -132,26 +115,29 @@ async function run () {
   writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify(rootPkg, null, 2))
 
   const rootTemplatePath = resolve(cwd, 'template')
-  const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
+  const jsOrTs = useTypeScript || argv.typescript ? 'typescript' : 'javascript'
+  const preset = !!argv.preset ? argv.preset : 'default'
 
-  renderTemplate(resolve(rootTemplatePath, jsOrTs, 'default'), projectRoot)
+  console.log('◌ Generating scaffold...')
+  renderTemplate(resolve(rootTemplatePath, jsOrTs, preset), projectRoot)
 
-  if (useStore) {
-    renderTemplate(resolve(rootTemplatePath, jsOrTs, 'pinia'), projectRoot)
-  }
+  console.log('USE YARn OR NPM: ', useYarnOrNpm)
 
-  if (useYarnOrNpm) {
+  if (useYarnOrNpm[0]) {      
+    console.log(`Installing dependencies with ${useYarnOrNpm}.`)
     installDependencies(projectRoot, useYarnOrNpm)
   }
+
+  console.log(`${projectName} has been generated at ${projectRoot}`)
 }
 
 run()
-  .then(() => {
+  .then((v) => {
     console.log('Discord community: https://community.vuetifyjs.com')
     console.log('Github: https://github.com/vuetifyjs/vuetify')
     console.log('Support Vuetify: https://github.com/sponsors/johnleider')
   })
-  .catch(e => {
-    console.error(e)
+  .catch((err) => {
+    console.error(err)
     process.exit()
   })
