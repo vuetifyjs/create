@@ -28,7 +28,7 @@ async function run () {
     projectName: undefined,
     canOverwrite: undefined,
     useTypeScript: argv.typescript,
-    useYarnOrNpm: false,
+    useYarnOrNpm: undefined,
   }
 
   try {
@@ -130,7 +130,7 @@ async function run () {
 }
 
 run()
-  .then((v) => {
+  .then(() => {
     console.log('Discord community: https://community.vuetifyjs.com')
     console.log('Github: https://github.com/vuetifyjs/vuetify')
     console.log('Support Vuetify: https://github.com/sponsors/johnleider')
