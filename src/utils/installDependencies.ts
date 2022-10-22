@@ -1,8 +1,14 @@
 import { spawnSync } from 'child_process'
 
-function installDependencies(projectRoot: string, npmOrYarn: 'npm' | 'yarn') {
-  const cmd = npmOrYarn === 'npm' ? 'npm install' : 'yarn'
-
+function installDependencies(projectRoot: string, packageManager: 'npm' | 'yarn' | 'pnpm') {
+  const cmd = (
+    packageManager === 'npm' ?
+      'npm install' :
+      packageManager === 'yarn' ?
+        'yarn' :
+        'pnpm install'
+  )
+  
   const spawn = spawnSync(cmd, {
     cwd: projectRoot,
     stdio: ['inherit', 'inherit', 'pipe'],

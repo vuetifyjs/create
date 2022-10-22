@@ -4,7 +4,7 @@
   "scripts": {
     "serve": "vite preview",
     "build": "vite build",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint . --fix --ignore-path .gitignore",
     "dev": "vite"
   },
   "dependencies": {
@@ -23,7 +23,8 @@
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "sass": "^1.55.0",
-    "vite": "^3.0.8",
+    "typescript": "^4.0.0",
+    "vite": "^3.1.8",
     "vite-plugin-vuetify": "^1.0.0-alpha.12"
   }
 }
