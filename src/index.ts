@@ -84,9 +84,9 @@ async function run () {
           message: 'Would you like to install dependencies with yarn, npm, or pnpm?',
           initial: 0,
           choices: [
+            { title: 'yarn', value: 'yarn' },
             { title: 'npm', value: 'npm' },
             { title: 'pnpm', value: 'pnpm' },
-            { title: 'yarn', value: 'yarn' },
             { title: 'none', value: null },
           ],
         },
