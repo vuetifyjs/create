@@ -81,7 +81,7 @@ async function run () {
         {
           name: 'usePackageManager',
           type: 'select',
-          message: 'Would you like to install dependencies with yarn or npm?',
+          message: 'Would you like to install dependencies with yarn, npm, or pnpm?',
           initial: 0,
           choices: [
             { title: 'npm', value: 'npm' },
