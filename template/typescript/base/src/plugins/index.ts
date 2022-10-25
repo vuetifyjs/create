@@ -1,7 +1,7 @@
 /**
- * plugins/index.js
+ * plugins/index.ts
  *
- * Automatically included in `./src/main.js`
+ * Automatically included in `./src/main.ts`
  */
 
 import { loadFonts } from './webfontloader'

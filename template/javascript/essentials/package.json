@@ -2,10 +2,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "serve": "vite preview",
+    "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --fix --ignore-path .gitignore",
-    "dev": "vite"
+    "preview": "vite preview",
+    "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",

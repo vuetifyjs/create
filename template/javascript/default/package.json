@@ -1,9 +1,9 @@
 {
   "version": "0.0.0",
   "scripts": {
-    "serve": "vite preview",
+    "dev": "vite",
     "build": "vite build",
-    "dev": "vite"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
