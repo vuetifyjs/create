@@ -1,6 +1,17 @@
 # create-vuetify
 
-### 💪 Supporting Vuetify
+## Flags
+
+`create-vuetify` provides flags that can be passed when using the CLI to generate a new project.
+
+| **Flags**      | **Values**                        | **Example**                             |
+|:---------------|-----------------------------------|-----------------------------------------|
+| `preset`       | `default, base, essentials`       | `--preset="default" or --preset default`|
+| `typescript`   | `boolean`                         | `--typescript`                          |
+
+
+## 💪 Supporting Vuetify
+
 <p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
 
 <ul>
@@ -24,6 +35,7 @@
 </ul>
 
 ### 📑 License
+
 [MIT](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2016-present Vuetify, LLC
