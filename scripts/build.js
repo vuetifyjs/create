@@ -8,6 +8,7 @@ async function bundleMain () {
     format: 'cjs',
     platform: 'node',
     target: 'node14',
+    external: ['validate-npm-package-name', 'kolorist', 'minimist', 'prompts'],
   })
 }
 
