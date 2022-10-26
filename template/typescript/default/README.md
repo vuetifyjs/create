@@ -1,6 +1,7 @@
 # default
 
 ## Project setup
+
 ```
 # yarn
 yarn
@@ -13,6 +14,7 @@ pnpm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 # yarn
 yarn dev
@@ -25,6 +27,7 @@ pnpm dev
 ```
 
 ### Compiles and minifies for production
+
 ```
 # yarn
 yarn build

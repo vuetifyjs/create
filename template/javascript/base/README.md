@@ -1,11 +1,8 @@
 # base
 
 ## Project setup
+
 ```
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --fix --ignore-path .gitignore"
 # yarn
 yarn
 
@@ -17,6 +14,7 @@ pnpm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 # yarn
 yarn dev
@@ -29,6 +27,7 @@ pnpm dev
 ```
 
 ### Compiles and minifies for production
+
 ```
 # yarn
 yarn build
@@ -41,6 +40,7 @@ pnpm build
 ```
 
 ### Lints and fixes files
+
 ```
 # yarn
 yarn lint
