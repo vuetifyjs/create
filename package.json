@@ -9,8 +9,8 @@
     "create-vuetify": "./dist/output.cjs"
   },
   "files": [
-    "./dist/output.cjs",
-    "./template"
+    "dist/output.cjs",
+    "template"
   ],
   "repository": {
     "type": "git",
