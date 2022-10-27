@@ -121,7 +121,7 @@ async function run () {
 
   writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify(rootPkg, null, 2))
 
-  const rootTemplatePath = resolve(cwd, 'template')
+  const rootTemplatePath = resolve(__dirname, '../template')
   const jsOrTs = useTypeScript || argv.typescript ? 'typescript' : 'javascript'
   const preset = !!argv.preset ? argv.preset : 'default'
 
