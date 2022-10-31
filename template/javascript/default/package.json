@@ -9,7 +9,7 @@
     "@mdi/font": "5.9.55",
     "roboto-fontface": "*",
     "vue": "^3.2.38",
-    "vuetify": "^3.0.0-beta.0",
+    "vuetify": "^3.0.0",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
