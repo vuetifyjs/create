@@ -8,7 +8,7 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@mdi/font": "5.9.55",
+    "@mdi/font": "7.0.96",
     "core-js": "^3.8.3",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
@@ -17,6 +17,8 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/webfontloader": "^1.6.35",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/eslint-config-typescript": "^11.0.0",
     "eslint": "^8.22.0",
