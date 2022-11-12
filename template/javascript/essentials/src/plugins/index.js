@@ -10,7 +10,7 @@ import vuetify from './vuetify'
 import pinia from '../store'
 import router from '../router'
 
-export function registerPlugins () {
+export function registerPlugins (app) {
   loadFonts()
   app
     .use(vuetify)
