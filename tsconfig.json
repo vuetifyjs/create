@@ -13,7 +13,6 @@
     "target": "esnext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
     "types": [
       "node"
     ]
