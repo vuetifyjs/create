@@ -72,6 +72,17 @@ async function run () {
           message: prev => `The project path: ${resolve(cwd, prev)} already exists, would you like to overwrite this directory?`,
         },
         {
+          name: 'usePreset',
+          type: context.usePreset ? null : 'select',
+          message: 'Which bundle would you like to install?',
+          initial: 1,
+          choices: [
+            { title: 'Default (Vuetify)', value: 'default' },
+            { title: 'Base (Vuetify, VueRouter)', value: 'base' },
+            { title: 'Essentials (Vuetify, VueRouter, Pinia)', value: 'essentials' },
+          ],
+        },
+        {
           name: 'useTypeScript',
           type: context.useTypeScript ? null : 'toggle',
           message: 'Use TypeScript?',
@@ -89,17 +100,6 @@ async function run () {
             { title: 'npm', value: 'npm' },
             { title: 'pnpm', value: 'pnpm' },
             { title: 'none', value: null },
-          ],
-        },
-        {
-          name: 'usePreset',
-          type: context.usePreset ? null : 'select',
-          message: 'Which bundle would you like to install?',
-          initial: 1,
-          choices: [
-            { title: 'Default (Vuetify)', value: 'default' },
-            { title: 'Base (Vuetify, VueRouter)', value: 'base' },
-            { title: 'Essentials (Vuetify, VueRouter, Pinia)', value: 'essentials' },
           ],
         },
       ],
