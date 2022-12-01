@@ -6,7 +6,7 @@
 
 | **Flags**      | **Values**                        | **Example**                             |
 |:---------------|-----------------------------------|-----------------------------------------|
-| `preset`       | `default, base, essentials`       | `--preset="default" or --preset default`|
+| `preset`       | `default`, `base`, `essentials`       | `--preset="default" or --preset default`|
 | `typescript`   | `boolean`                         | `--typescript`                          |
 
 
