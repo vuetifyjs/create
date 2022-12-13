@@ -16,7 +16,7 @@ import { installDependencies, renderTemplate } from './utils'
 
 const validPresets = ['base', 'default', 'essentials']
 
-type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'usePackageManager'
+type PromptQuestions = 'projectName' | 'canOverwrite' | 'useTypeScript' | 'usePackageManager' | 'usePreset'
 
 async function run () {
   const cwd = process.cwd()
@@ -40,6 +40,7 @@ async function run () {
     canOverwrite: undefined,
     useTypeScript: argv.typescript,
     usePackageManager: undefined,
+    usePreset: argv.preset,
   }
 
   try {
@@ -69,6 +70,17 @@ async function run () {
             ) ? null : 'toggle'
           },
           message: prev => `The project path: ${resolve(cwd, prev)} already exists, would you like to overwrite this directory?`,
+        },
+        {
+          name: 'usePreset',
+          type: context.usePreset ? null : 'select',
+          message: 'Which bundle would you like to install?',
+          initial: 1,
+          choices: [
+            { title: 'Default (Vuetify)', value: 'default' },
+            { title: 'Base (Vuetify, VueRouter)', value: 'base' },
+            { title: 'Essentials (Vuetify, VueRouter, Pinia)', value: 'essentials' },
+          ],
         },
         {
           name: 'useTypeScript',
@@ -106,6 +118,7 @@ async function run () {
     projectName,
     useTypeScript,
     usePackageManager,
+    usePreset,
   } = context
 
   const projectRoot = join(cwd, projectName)
@@ -123,7 +136,7 @@ async function run () {
 
   const rootTemplatePath = resolve(__dirname, '../template')
   const jsOrTs = useTypeScript || argv.typescript ? 'typescript' : 'javascript'
-  const preset = !!argv.preset ? argv.preset : 'default'
+  const preset = argv.preset || usePreset
 
   console.log('\n◌ Generating scaffold...')
   renderTemplate(resolve(rootTemplatePath, jsOrTs, preset), projectRoot)
