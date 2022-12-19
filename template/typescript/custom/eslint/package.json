@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "lint": "eslint . --fix --ignore-path .gitignore"
+  },
+  "devDependencies": {
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0"
+  }
+}
