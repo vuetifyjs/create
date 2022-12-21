@@ -8,6 +8,11 @@ function mergePkg (source: string, destination: string) {
   const src = JSON.parse(readFileSync(source, 'utf8'))
   const mergedPkg = deepMerge(target, src)
 
+  const keysToSort = ['devDependencies', 'dependencies']
+  keysToSort.forEach((k) => {
+    mergedPkg[k] = Object.keys(mergedPkg[k]).sort().reduce((a: { [key: string]: string }, c) => (a[c] = mergedPkg[k][c], a), {})
+  })
+
   writeFileSync(destination, JSON.stringify(mergedPkg, null, 2) + '\n')
 }
 
