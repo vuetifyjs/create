@@ -4,11 +4,10 @@
 
 `create-vuetify` provides flags that can be passed when using the CLI to generate a new project.
 
-| **Flags**      | **Values**                        | **Example**                             |
-|:---------------|-----------------------------------|-----------------------------------------|
-| `preset`       | `default`, `base`, `essentials`       | `--preset="default" or --preset default`|
-| `typescript`   | `boolean`                         | `--typescript`                          |
-
+| **Flags**    | **Values**                                | **Example**                              |
+| :----------- | ----------------------------------------- | ---------------------------------------- |
+| `preset`     | `default`, `base`, `essentials`, `custom` | `--preset="default" or --preset default` |
+| `typescript` | `boolean`                                 | `--typescript`                           |
 
 ## 💪 Supporting Vuetify
 
