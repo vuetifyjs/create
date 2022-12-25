@@ -32,7 +32,7 @@ async function run () {
 
   const context: ContextState = {
     canOverwrite: false,
-    cwd: process.cwd().replace(/(\s+)/g, '\\$1'),
+    cwd: process.cwd(),
     projectName: 'vuetify-project',
     useRouter: false,
     useTypeScript: argv.typescript,
