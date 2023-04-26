@@ -1,6 +1,6 @@
 {
   "name": "create-vuetify",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/output.cjs",
   "author": "Elijah Kotyluk <elijah@elijahkotyluk.com>",
   "license": "MIT",
