@@ -11,6 +11,9 @@ npm install
 
 # pnpm
 pnpm install
+
+# bun
+bun install
 ```
 
 ### Compiles and hot-reloads for development
@@ -24,6 +27,9 @@ npm run dev
 
 # pnpm
 pnpm dev
+
+# bun
+bun run dev
 ```
 
 ### Compiles and minifies for production
@@ -37,6 +43,9 @@ npm run build
 
 # pnpm
 pnpm build
+
+# bun
+bun run build
 ```
 
 ### Lints and fixes files
@@ -50,6 +59,9 @@ npm run lint
 
 # pnpm
 pnpm lint
+
+# bun
+bun run lint
 ```
 
 ### Customize configuration
