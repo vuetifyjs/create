@@ -17,7 +17,7 @@ type ContextState = {
   canOverwrite?: boolean,
   useEslint?: boolean,
   useTypeScript?: boolean,
-  usePackageManager?: 'npm' | 'pnpm' | 'yarn',
+  usePackageManager?: 'npm' | 'pnpm' | 'yarn' | 'bun',
   usePreset?: 'base' | 'default' | 'essentials' | 'custom',
   useStore?: 'vuex' | 'pinia' | boolean,
   useRouter?: boolean,
@@ -98,12 +98,13 @@ const promptQuestions = (context: ContextState): PromptObject<string>[] => [
   {
     name: 'usePackageManager',
     type: 'select',
-    message: 'Would you like to install dependencies with yarn, npm, or pnpm?',
+    message: 'Would you like to install dependencies with yarn, npm, pnpm, or bun?',
     initial: 0,
     choices: [
       { title: 'yarn', value: 'yarn' },
       { title: 'npm', value: 'npm' },
       { title: 'pnpm', value: 'pnpm' },
+      { title: 'bun', value: 'bun' },
       { title: 'none', value: null },
     ],
   },
