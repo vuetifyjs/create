@@ -1,6 +1,5 @@
-type GenericObject = { [key: string]: any }
 interface DeepMerge {
-  (...sources: Array<GenericObject>): GenericObject
+  (...sources: Array<{ [key: string]: any }>): { [key: string]: any }
 }
 
 const isObject: { (key: any): boolean } = (v: unknown): boolean => {
@@ -11,7 +10,7 @@ const isObject: { (key: any): boolean } = (v: unknown): boolean => {
   )
 }
 
-const deepMerge: DeepMerge = <T extends GenericObject[]>(...sources: T): GenericObject =>
+const deepMerge: DeepMerge = <T extends { [key: string]: any }[]>(...sources: T): { [key: string]: any } =>
   sources.reduce((acc, curr) => {
     Object.keys(curr).forEach((key) => {
       if (Array.isArray(acc[key]) && Array.isArray(curr[key])) {
