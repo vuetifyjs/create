@@ -40,8 +40,8 @@ async function run () {
     useStore: undefined,
     usePackageManager: undefined,
   }
-  
-  const {  
+
+  const {
     canOverwrite,
     cwd,
     projectName,
@@ -83,21 +83,21 @@ async function run () {
     if (useEslint) {
       renderTemplate(resolve(templatePath, 'eslint'), projectRoot)
     }
-  
+
     if (useRouter) {
       renderTemplate(resolve(templatePath, 'router'), projectRoot)
     }
-  
+
     if (useStore) {
       renderTemplate(resolve(templatePath, 'store'), projectRoot)
-  
+
       if (useRouter) {
         renderTemplate(resolve(templatePath, 'router-pinia'), projectRoot)
       }
     }
   }
 
-  if (usePackageManager) {      
+  if (usePackageManager) {
     console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
     installDependencies(projectRoot, usePackageManager)
   }
