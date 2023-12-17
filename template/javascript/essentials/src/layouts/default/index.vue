@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <default-bar />
+    <DefaultBar />
 
-    <default-view />
+    <DefaultView />
   </v-app>
 </template>
 
