@@ -55,7 +55,7 @@ const promptQuestions = (context: ContextState): PromptObject<string>[] => [
     name: 'usePreset',
     type: context.usePreset ? null : 'select',
     message: 'Which preset would you like to install?',
-    initial: 1,
+    initial: 0,
     choices: [
       { title: 'Default (Vuetify)', value: 'default' },
       { title: 'Base (Default, Router, Unplugin)', value: 'base' },

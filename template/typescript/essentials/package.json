@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "pinia" : "^2.0.0",
-    "vite-plugin-vue-layouts": "^0.8.0"
+    "pinia" : "^2.1.0",
+    "vite-plugin-vue-layouts": "^0.10.0"
   }
 }
