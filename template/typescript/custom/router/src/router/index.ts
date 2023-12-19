@@ -1,7 +1,7 @@
 // Composables
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-const routes: RouteRecordRaw = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('@/layouts/default/Default.vue'),
