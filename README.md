@@ -1,40 +1,77 @@
 # create-vuetify
 
-## Flags
+<p align="center">
+  <img src="https://cdn.vuetifyjs.com/docs/images/logos/v.png" height="128">
+</p>
 
-`create-vuetify` provides flags that can be passed when using the CLI to generate a new project.
+## Getting Started
 
-| **Flags**    | **Values**                                | **Example**                              |
-| :----------- | ----------------------------------------- | ---------------------------------------- |
-| `preset`     | `default`, `base`, `essentials`, `custom` | `--preset="default" or --preset default` |
-| `typescript` | `boolean`                                 | `--typescript`                           |
+Using your terminal, navigate to your sites directory and run the following command:
 
-## 💪 Supporting Vuetify
+**Using Yarn:**
+```bash
+yarn create vuetify
+```
 
-<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider:</p>
+**Using NPM:**
+```bash
+npm create vuetify
+```
 
-<ul>
-  <li>
-    <a href="https://github.com/users/johnleider/sponsorship">Becoming a sponsor on Github</a>
-    <strong><small>(supports John)</small></strong>
-  </li>
-  <li>
-    <a href="https://opencollective.com/vuetify">Becoming a backer on OpenCollective</a>
-    <strong><small>(supports the Dev team)</small></strong>
-  </li>
-  <li>
-    <a href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=readme">Become a subscriber on Tidelift</a>
-  </li>
-  <li>
-    <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
-  </li>
-  <li>
-    <a href="https://vuetifyjs.com/getting-started/consulting-and-support?ref=github">Book time with the Team</a>
-  </li>
-</ul>
+**Using PNPM:**
+```bash
+pnpm create vuetify
+```
 
-### 📑 License
+**Using Bun:**
+```bash
+bun create vuetify
+```
 
-[MIT](http://opensource.org/licenses/MIT)
+## Vuetify
 
-Copyright (c) 2016-present Vuetify, LLC
+Vuetify is an Open Source UI Library that is developed exactly according to Material Design spec. Every component is handcrafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and sponsors, additional components will be designed and made available for everyone to enjoy.
+
+The documentation for **Vuetify** is hosted [here](https://vuetifyjs.com/).
+
+### Support Development
+
+Vuetify is an open source MIT project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
+
+- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
+- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
+- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
+- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
+- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
+- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
+- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
+
+## Vite
+
+Vite is a build tool that significantly improves the front-end development experience. You can use Vite to set up a development environment for frameworks like Vue and React, and even for a vanilla JavaScript app with a dev server and hot reloading in just three commands. It also easily integrates with [TypeScript](https://vitejs.dev/guide/features.html#typescript).
+
+## Browser Support
+
+| Browser | Status |
+| - | - |
+| Chromium (Chrome, Edge) | ✅ Supported * |
+| Firefox | ✅ Supported * |
+| Safari 15.4+ | ✅ Supported |
+| Safari 13. | ❗ Requires polyfill |
+| Edge <79 | ⛔ Not supported |
+| Internet Explorer | ⛔ Not supported |
+
+## Resources
+
+- 📄 [Documentation](https://vuetifyjs.com/)
+- 🚨 [Report an Issue](https://issues.vuetifyjs.com/)
+- 🏬 [Vuetify Store](https://store.vuetifyjs.com/)
+- 🎮 [Vuetify Playground](https://play.vuetifyjs.com/)
+- 💬 [Discord](https://community.vuetifyjs.com)
+
+## Licensing
+
+- Copyright 2023 Vuetify <https://vuetifyjs.com/>
+- Vuetify [License Information](https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md)
+
+<br>
