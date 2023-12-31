@@ -1,7 +1,7 @@
 {
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "node --no-warnings ./node_modules/.bin/vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
