@@ -48,9 +48,6 @@ async function run () {
     useTypeScript,
     usePackageManager,
     usePreset,
-    useStore,
-    useEslint,
-    useRouter,
   } = await initPrompts(context)
 
   const projectRoot = join(cwd, projectName)
@@ -66,35 +63,19 @@ async function run () {
   // Create base package.json
   writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify({ name: projectName }, null, 2))
 
-
   const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
   let templatePath = resolve(__dirname, '../template', jsOrTs)
 
   console.log('\n◌ Generating scaffold...')
 
-  if (usePreset !== 'custom') {
-    renderTemplate(resolve(templatePath, usePreset), projectRoot)
+  renderTemplate(resolve(templatePath, 'default'), projectRoot)
+
+  if (['base', 'essentials'].includes(usePreset)) {
+    renderTemplate(resolve(templatePath, 'base'), projectRoot)
   }
-  else {
-    renderTemplate(resolve(templatePath, 'default'), projectRoot)
 
-    templatePath = resolve(templatePath, usePreset)
-
-    if (useEslint) {
-      renderTemplate(resolve(templatePath, 'eslint'), projectRoot)
-    }
-
-    if (useRouter) {
-      renderTemplate(resolve(templatePath, 'router'), projectRoot)
-    }
-
-    if (useStore) {
-      renderTemplate(resolve(templatePath, 'store'), projectRoot)
-
-      if (useRouter) {
-        renderTemplate(resolve(templatePath, 'router-pinia'), projectRoot)
-      }
-    }
+  if (['essentials', 'recommended'].includes(usePreset)) {
+    renderTemplate(resolve(templatePath, 'essentials'), projectRoot)
   }
 
   if (usePackageManager) {
