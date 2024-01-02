@@ -58,7 +58,7 @@ const promptQuestions = (context: ContextState): PromptObject<string>[] => [
     initial: 0,
     choices: [
       { title: 'Default (Vuetify)', value: 'default' },
-      { title: 'Base (Default, Router, Unplugin)', value: 'base' },
+      { title: 'Base (Default, Routing)', value: 'base' },
       { title: 'Essentials (Base, Layouts, Pinia)', value: 'essentials' },
     ],
   },
