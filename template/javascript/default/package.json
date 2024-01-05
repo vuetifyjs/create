@@ -1,7 +1,7 @@
 {
   "version": "0.0.0",
   "scripts": {
-    "dev": "node --no-warnings ./node_modules/.bin/vite",
+    "dev": "cross-env NODE_OPTIONS='--no-warnings' vite",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",
+    "cross-env": "^7.0.3",
     "sass": "^1.69.0",
     "vite-plugin-vuetify": "^2.0.0",
     "vite": "^5.0.0",
