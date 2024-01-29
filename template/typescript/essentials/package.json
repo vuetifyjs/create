@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "pinia" : "^2.1.0",
+    "unplugin-auto-import": "^0.17.3",
     "vite-plugin-vue-layouts": "^0.10.0"
   }
 }

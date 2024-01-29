@@ -1,10 +1,11 @@
 // Plugins
+import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import Vue from '@vitejs/plugin-vue'
-import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import ViteFonts from 'unplugin-fonts/vite'
+import Fonts from 'unplugin-fonts/vite'
 import Layouts from 'vite-plugin-vue-layouts'
+import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
+import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -26,13 +27,23 @@ export default defineConfig({
       },
     }),
     Components(),
-    ViteFonts({
+    Fonts({
       google: {
         families: [{
           name: 'Roboto',
           styles: 'wght@100;300;400;500;700;900',
         }],
       },
+    }),
+    AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+      ],
+      eslintrc: {
+        enabled: true,
+      },
+      vueTemplate: true,
     }),
   ],
   define: { 'process.env': {} },
