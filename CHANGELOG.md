@@ -1,5 +1,12 @@
 
 
+## [2.1.1](https://github.com/vuetifyjs/create-vuetify/compare/v2.1.0...v2.1.1) (2024-02-29)
+
+
+### Bug Fixes
+
+* **default:** don't suppress warning in dev script ([105c901](https://github.com/vuetifyjs/create-vuetify/commit/105c901ae061bdbeae81346269e49dffd9a7d189))
+
 # [2.1.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.0.0...v2.1.0) (2024-01-29)
 
 
