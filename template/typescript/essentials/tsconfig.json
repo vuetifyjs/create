@@ -18,7 +18,10 @@
       "@/*": [
        "src/*"
       ]
-     }
+     },
+		"types": [
+			"vite-plugin-vue-layouts/client"	
+		]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "./typed-router.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
