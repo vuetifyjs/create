@@ -22,7 +22,7 @@ export default defineConfig({
       imports: [
         'vue',
         {
-          'vue-router-auto': ['useRoute', 'useRouter'],
+          'vue-router/auto': ['useRoute', 'useRouter'],
         }
       ],
       dts: 'src/auto-imports.d.ts',
