@@ -1,5 +1,13 @@
 
 
+## [2.1.2](https://github.com/vuetifyjs/create-vuetify/compare/v2.1.1...v2.1.2) (2024-03-10)
+
+
+### Bug Fixes
+
+* **js/ts:** upgrade all packages, fix types across all package managers ([7bb5d6d](https://github.com/vuetifyjs/create-vuetify/commit/7bb5d6d3bda670cf16a7d4f5fdcd81bbe396666b)), closes [#42](https://github.com/vuetifyjs/create-vuetify/issues/42)
+* **vite.config:** correct autoimport name space ([6dada34](https://github.com/vuetifyjs/create-vuetify/commit/6dada34ad922a3995ce4bab5c3e309c04520ca96))
+
 ## [2.1.1](https://github.com/vuetifyjs/create-vuetify/compare/v2.1.0...v2.1.1) (2024-02-29)
 
 
