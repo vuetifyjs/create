@@ -14,8 +14,26 @@ import { fileURLToPath, URL } from 'node:url'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    VueRouter(),
+    VueRouter({
+      dts: 'src/typed-router.d.ts',
+    }),
     Layouts(),
+    AutoImport({
+      imports: [
+        'vue',
+        {
+          'vue-router-auto': ['useRoute', 'useRouter'],
+        }
+      ],
+      dts: 'src/auto-imports.d.ts',
+      eslintrc: {
+        enabled: true,
+      },
+      vueTemplate: true,
+    }),
+    Components({
+      dts: 'src/components.d.ts',
+    }),
     Vue({
       template: { transformAssetUrls },
     }),
@@ -26,7 +44,6 @@ export default defineConfig({
         configFile: 'src/styles/settings.scss',
       },
     }),
-    Components(),
     Fonts({
       google: {
         families: [ {
@@ -34,17 +51,6 @@ export default defineConfig({
           styles: 'wght@100;300;400;500;700;900',
         }],
       },
-    }),
-    AutoImport({
-      imports: [
-        'vue',
-        'vue-router',
-      ],
-      dts: true,
-      eslintrc: {
-        enabled: true,
-      },
-      vueTemplate: true,
     }),
   ],
   define: { 'process.env': {} },

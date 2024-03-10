@@ -6,15 +6,15 @@
     "core-js": "^3.34.0"
   },
   "devDependencies": {
-    "@vue/eslint-config-typescript": "^12.0.0",
-    "eslint": "^8.56.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-n": "^16.4.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-vue": "^9.19.0",
-    "vue-router": "^4.2.0",
-    "unplugin-vue-router": "^0.7.0"
+    "eslint-plugin-vue": "^9.22.0",
+    "vue-router": "^4.3.0",
+    "unplugin-vue-router": "^0.8.4"
   }
 }
