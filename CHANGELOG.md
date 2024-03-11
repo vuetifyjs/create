@@ -1,5 +1,17 @@
 
 
+# [2.2.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.1.2...v2.2.0) (2024-03-11)
+
+
+### Bug Fixes
+
+* **javascript:** swap router files ([3959c62](https://github.com/vuetifyjs/create-vuetify/commit/3959c623029260d644fe503389f365f9d9c97bac))
+
+
+### Features
+
+* **HelloWorld:** update design and add footer ([08a2e1d](https://github.com/vuetifyjs/create-vuetify/commit/08a2e1ddbffa3c7d7d67f81e120a41fa813a5c86))
+
 ## [2.1.2](https://github.com/vuetifyjs/create-vuetify/compare/v2.1.1...v2.1.2) (2024-03-10)
 
 
