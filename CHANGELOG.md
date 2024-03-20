@@ -1,5 +1,13 @@
 
 
+## [2.2.1](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.0...v2.2.1) (2024-03-20)
+
+
+### Bug Fixes
+
+* **javascript:** update target vue/vuetify versions ([d68cd3c](https://github.com/vuetifyjs/create-vuetify/commit/d68cd3c5cee37a5e4d08ea6cdbb0144fbb9ec211))
+* vue-router when using base preset ([#47](https://github.com/vuetifyjs/create-vuetify/issues/47)) ([edf8d10](https://github.com/vuetifyjs/create-vuetify/commit/edf8d108991995bb79a4ce546d86090b6c6f212e))
+
 # [2.2.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.1.2...v2.2.0) (2024-03-11)
 
 
