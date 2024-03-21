@@ -4,10 +4,10 @@ async function bundleMain () {
   await build({
     bundle: true,
     entryPoints: ['src/index.ts'],
-    outfile: 'dist/output.cjs',
-    format: 'cjs',
+    outfile: 'dist/index.mjs',
+    format: 'esm',
     platform: 'node',
-    target: 'node14',
+    target: 'node18',
     external: ['validate-npm-package-name', 'kolorist', 'minimist', 'prompts'],
   })
 }

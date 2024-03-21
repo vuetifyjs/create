@@ -1,16 +1,16 @@
 {
   "name": "create-vuetify",
   "version": "2.2.1",
-  "main": "dist/output.cjs",
   "author": "Elijah Kotyluk <elijah@elijahkotyluk.com>",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "create-vuetify": "./dist/output.cjs"
+    "create-vuetify": "index.js"
   },
   "files": [
-    "dist/output.cjs",
-    "template"
+    "index.js",
+    "template",
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "start": "node ./dist/output.cjs",
+    "start": "node ./index.js",
     "lint": "eslint --fix 'src/**'",
     "prepublishOnly": "npm run build"
   },

@@ -1,7 +1,6 @@
-#!/usr/bin/env node
-
 // Node
-import { resolve, join } from 'path'
+import { dirname, join, resolve } from 'path'
+import { fileURLToPath } from 'url'
 import { mkdirSync, rmSync, writeFileSync } from 'fs'
 
 // Types
@@ -47,6 +46,7 @@ async function run () {
     projectName,
     useTypeScript,
     usePackageManager,
+    installDependencies: installDeps,
     usePreset,
   } = await initPrompts(context)
 
@@ -64,7 +64,7 @@ async function run () {
   writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify({ name: projectName }, null, 2))
 
   const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
-  let templatePath = resolve(__dirname, '../template', jsOrTs)
+  let templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template', jsOrTs)
 
   console.log('\n◌ Generating scaffold...')
 
@@ -78,7 +78,7 @@ async function run () {
     renderTemplate(resolve(templatePath, 'essentials'), projectRoot)
   }
 
-  if (usePackageManager) {
+  if (usePackageManager && installDeps) {
     console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
     installDependencies(projectRoot, usePackageManager)
   }
