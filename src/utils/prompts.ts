@@ -18,6 +18,7 @@ type ContextState = {
   useEslint?: boolean,
   useTypeScript?: boolean,
   usePackageManager?: 'npm' | 'pnpm' | 'yarn' | 'bun',
+  installDependencies?: boolean,
   usePreset?: 'base' | 'default' | 'essentials' | 'custom',
   useStore?: 'vuex' | 'pinia' | boolean,
   useRouter?: boolean,
@@ -106,6 +107,14 @@ const promptQuestions = (context: ContextState): PromptObject<string>[] => [
       { title: 'bun', value: 'bun' },
       { title: 'none', value: null },
     ],
+  },
+  {
+    name: 'installDependencies',
+    type: context.installDependencies ? null : 'toggle',
+    message: 'Install Dependencies?',
+    active: 'Yes',
+    inactive: 'No',
+    initial: false,
   },
 ]
 
