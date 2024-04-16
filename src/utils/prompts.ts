@@ -15,13 +15,10 @@ type ContextState = {
   cwd: string,
   projectName?: string,
   canOverwrite?: boolean,
-  useEslint?: boolean,
   useTypeScript?: boolean,
   usePackageManager?: 'npm' | 'pnpm' | 'yarn' | 'bun',
   installDependencies?: boolean,
-  usePreset?: 'base' | 'default' | 'essentials' | 'custom',
-  useStore?: 'vuex' | 'pinia' | boolean,
-  useRouter?: boolean,
+  usePreset?: 'base' | 'default' | 'essentials'
 }
 
 // Array of prompt question objects
@@ -71,30 +68,6 @@ const promptQuestions = (context: ContextState): PromptObject<string>[] => [
     inactive: 'No',
     initial: false,
   },
-  // {
-  //   name: 'useRouter',
-  //   type: (_, { usePreset }) => usePreset !== 'custom' && context.usePreset !== 'custom' ? null : 'toggle',
-  //   message: 'Use Vue Router?',
-  //   active: 'Yes',
-  //   inactive: 'No',
-  //   initial: false,
-  // },
-  // {
-  //   name: 'useStore',
-  //   type: (_, { usePreset }) => usePreset !== 'custom' && context.usePreset !== 'custom' ? null : 'toggle',
-  //   message: 'Use Pinia?',
-  //   active: 'Yes',
-  //   inactive: 'No',
-  //   initial: false,
-  // },
-  // {
-  //   name: 'useEslint',
-  //   type: (_, { usePreset }) => usePreset !== 'custom' && context.usePreset !== 'custom' ? null : 'toggle',
-  //   message: 'Use ESLint?',
-  //   active: 'Yes',
-  //   inactive: 'No',
-  //   initial: false,
-  // },
   {
     name: 'usePackageManager',
     type: 'select',
@@ -127,7 +100,7 @@ const promptOptions: PromptOptions = {
 type DefinedContextState = { [P in keyof ContextState]-?: ContextState[P] }
 
 const initPrompts = async (context: ContextState) => {
-  if (context.usePreset && context.usePreset !== 'custom') {
+  if (context.usePreset) {
     context = {
       ...context,
       ...presets[context.usePreset],
