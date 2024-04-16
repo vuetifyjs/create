@@ -1,5 +1,12 @@
 
 
+## [2.2.2](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.1...v2.2.2) (2024-04-16)
+
+
+### Bug Fixes
+
+* **prompts:** remove unused functionality ([2fa2d24](https://github.com/vuetifyjs/create-vuetify/commit/2fa2d24a6fff585f4ad762f98f4efbd86861f07e))
+
 ## [2.2.1](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.0...v2.2.1) (2024-03-20)
 
 
