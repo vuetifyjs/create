@@ -15,7 +15,7 @@ yarn create vuetify
 
 **Using NPM:**
 ```bash
-npm create vuetify
+npm create vuetify@latest
 ```
 
 **Using PNPM:**
