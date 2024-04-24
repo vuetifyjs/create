@@ -1,5 +1,13 @@
 
 
+## [2.2.3](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.2...v2.2.3) (2024-04-24)
+
+
+### Bug Fixes
+
+* **prompts:** make install dependencies default ([5fcdb16](https://github.com/vuetifyjs/create-vuetify/commit/5fcdb1647feb32dea7d91a0d030c4f0915110233))
+* **templates:** update language for HelloWorld in default install ([91e3ff9](https://github.com/vuetifyjs/create-vuetify/commit/91e3ff90054ccafdc41a442cd97cb3db5be50763))
+
 ## [2.2.2](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.1...v2.2.2) (2024-04-16)
 
 
