@@ -87,7 +87,7 @@ const promptQuestions = (context: ContextState): PromptObject<string>[] => [
     message: 'Install Dependencies?',
     active: 'Yes',
     inactive: 'No',
-    initial: false,
+    initial: 'Yes',
   },
 ]
 
