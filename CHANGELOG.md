@@ -1,5 +1,7 @@
 
 
+## [2.2.4](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.3...v2.2.4) (2024-06-07)
+
 ## [2.2.3](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.2...v2.2.3) (2024-04-24)
 
 
