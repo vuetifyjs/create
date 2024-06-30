@@ -1,5 +1,13 @@
 
 
+## [2.2.5](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.4...v2.2.5) (2024-06-30)
+
+
+### Bug Fixes
+
+* **tsconfig:** only apply layout types in essentials preset ([96079b0](https://github.com/vuetifyjs/create-vuetify/commit/96079b0e1b0acaa2763426f1eff5d42bd254d82c))
+* **tsconfig:** only apply router types in base preset ([b803f19](https://github.com/vuetifyjs/create-vuetify/commit/b803f19814f9d6455042b067b21e787d9be341eb))
+
 ## [2.2.4](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.3...v2.2.4) (2024-06-07)
 
 ## [2.2.3](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.2...v2.2.3) (2024-04-24)
