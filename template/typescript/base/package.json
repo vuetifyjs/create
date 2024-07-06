@@ -3,7 +3,7 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "core-js": "^3.34.0"
+    "core-js": "^3.37.1"
   },
   "devDependencies": {
     "@vue/eslint-config-typescript": "^13.0.0",
@@ -12,9 +12,9 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-vue": "^9.22.0",
-    "vue-router": "^4.3.0",
-    "unplugin-vue-router": "^0.8.4"
+    "eslint-plugin-promise": "^6.4.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "vue-router": "^4.4.0",
+    "unplugin-vue-router": "^0.10.0"
   }
 }
