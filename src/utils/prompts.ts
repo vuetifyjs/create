@@ -53,11 +53,11 @@ const promptQuestions = (context: ContextState): PromptObject<string>[] => [
     name: 'usePreset',
     type: context.usePreset ? null : 'select',
     message: 'Which preset would you like to install?',
-    initial: 0,
+    initial: 1,
     choices: [
-      { title: 'Default (Vuetify)', value: 'default' },
-      { title: 'Base (Default, Routing)', value: 'base' },
-      { title: 'Essentials (Base, Layouts, Pinia)', value: 'essentials' },
+      { title: 'Barebones (Only Vue & Vuetify)', value: 'default' },
+      { title: 'Default (Adds routing, ESLint & SASS variables)', value: 'base' },
+      { title: 'Recommended (Everything from Default. Adds auto importing, layouts & pinia)', value: 'essentials' },
     ],
   },
   {
