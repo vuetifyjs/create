@@ -1,5 +1,14 @@
 
 
+## [2.2.6](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.5...v2.2.6) (2024-07-10)
+
+
+### Bug Fixes
+
+* **AppFooter:** add missing discord icon ([32f8e7c](https://github.com/vuetifyjs/create-vuetify/commit/32f8e7cf62cb0a2a220d58b8e69e06a7ca74fad8))
+* **router:** add workaround for dynamic import error ([fa4d655](https://github.com/vuetifyjs/create-vuetify/commit/fa4d655debeddc68af816aee22606e7e8fe14b0a))
+* **sass:** avoid deprecation warning by pinning version ([6d5cd73](https://github.com/vuetifyjs/create-vuetify/commit/6d5cd735bb799403386e1c5d4e27623bdf762496))
+
 ## [2.2.5](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.4...v2.2.5) (2024-06-30)
 
 
