@@ -51,4 +51,14 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  /* add this to enable new Vite 5.4.0 sass preprocessor options
+  css: {
+    preprocessorOptions: {
+      sass: {
+        api: 'modern',
+      },
+    },
+    preprocessorMaxWorkers: true,
+  },
+  */
 })
