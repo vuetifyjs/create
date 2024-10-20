@@ -149,11 +149,13 @@ function configureVuetify(ctx: NuxtContext, nuxtConfig: ReturnType<typeof parseM
     },
   }
   config.css = []
-  // vuetify-nuxt-module will detect @mdi/font adding to the css array
+  // vuetify-nuxt-module:
+  // - will detect @mdi/font adding to the css array
+  // - will add vuetify/styles to the css array if not disabled
   if (!ctx.useNuxtModule) {
     config.css.push('@mdi/font/css/materialdesignicons.css')
+    config.css.push('vuetify/styles')
   }
-  config.css.push('vuetify/styles')
   // todo: add only required fonts
   addNuxtModule(nuxtConfig, '@nuxt/fonts')
   return config
@@ -348,9 +350,13 @@ function prepareProject(ctx: NuxtContext) {
   }).code
 
   // add some hints to the nuxt config
+  // https://github.com/Pinegrow/pg-nuxt-vuetify-tailwindcss/blob/00fac86769bc43e034b90dacfd03becc92b93b53/nuxt.config.ts#L100-L104
   if (useNuxtModule) {
     code = code.replace('ssrClientHints:', `// check https://vuetify-nuxt-module.netlify.app/guide/server-side-rendering.html
       ssrClientHints:`)
+    code = code.replace('styles:', `// /* If customizing sass global variables ($utilities, $reset, $color-pack, $body-font-family, etc) */
+      // disableVuetifyStyles: true,
+      styles:`)
   } else {
     code = code.replace('ssr:', `// when enabling/disabling ssr option, remember to update ssr option in plugins/vuetify.ts
   ssr:`)
