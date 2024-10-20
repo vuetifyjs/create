@@ -1,4 +1,6 @@
 // Node
+import fs from 'fs'
+import path from 'path'
 import { spawnSync } from 'child_process'
 
 // Types
@@ -8,10 +10,8 @@ import type { NuxtContext, PackageJsonEntry } from './types'
 import { addPackageObject, detectPkgInfo, editFile, getPaths, runCommand } from './utils'
 import { versions } from './versions'
 import { detect } from 'package-manager-detector'
-import fs from 'fs'
-import path from 'path'
-import {generateCode, parseModule} from 'magicast'
-import { addNuxtModule, deepMergeObject, getDefaultExportOptions } from 'magicast/helpers'
+import { generateCode, parseModule } from 'magicast'
+import { addNuxtModule, getDefaultExportOptions } from 'magicast/helpers'
 
 export async function renderNuxtTemplate(ctx: NuxtContext) {
   const {
@@ -282,7 +282,7 @@ function prepareNuxtModule(
       },
     },
     styles: ctx.nuxtPreset === 'nuxt-default' ? true : {
-      configFile: ctx.useNuxtV4Compat ? 'app/assets/settings.scss' : 'assets/settings.scss',
+      configFile: 'assets/settings.scss',
     },
   }
   configureVuetify(ctx, nuxtConfig)
