@@ -1,24 +1,36 @@
-const defaultContext = {
+export interface Preset {
+  useEslint: boolean
+  useRouter: boolean
+  useStore: boolean
+}
+
+export type NuxtPresetName = 'nuxt-base' | 'nuxt-default' | 'nuxt-essentials'
+export type PresetName = 'base' | 'default' | 'essentials' | NuxtPresetName
+
+const defaultContext: Preset = {
   useEslint: false,
   useRouter: false,
   useStore: false,
 }
 
-const baseContext = {
+const baseContext: Preset = {
   ...defaultContext,
   useEslint: true,
   useRouter: true,
 }
 
-const essentialsContext = {
+const essentialsContext: Preset = {
   ...baseContext,
   useStore: true,
 }
 
-const presets = {
-  base: baseContext,
-  default: defaultContext,
-  essentials: essentialsContext,
+const presets: Record<PresetName, Preset> = {
+  'base': baseContext,
+  'default': defaultContext,
+  'essentials': essentialsContext,
+  'nuxt-base': baseContext,
+  'nuxt-default': defaultContext,
+  'nuxt-essentials': essentialsContext,
 }
 
 export { presets }
