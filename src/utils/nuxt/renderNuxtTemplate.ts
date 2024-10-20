@@ -27,27 +27,27 @@ export async function renderNuxtTemplate(ctx: NuxtContext) {
   const isYarn1 = pkgManager === 'yarn' && pkgInfo?.version.startsWith('1.')
 
   const customCommand = useNuxtV4Compat
-      ? `npx nuxi@latest init -t v4-compat ${projectName}`
-      : `npm exec nuxi init ${projectName}`
+    ? `npx nuxi@latest init -t v4-compat ${projectName}`
+    : `npm exec nuxi init ${projectName}`
 
   const fullCustomCommand = customCommand
-      // Only Yarn 1.x doesn't support `@version` in the `create` command
-      .replace('@latest', () => (isYarn1 ? '' : '@latest'))
-      .replace(/^npm exec/, () => {
-        // Prefer `pnpm dlx`, `yarn dlx`, or `bun x`
-        if (pkgManager === 'pnpm')
-          return 'pnpm dlx'
+    // Only Yarn 1.x doesn't support `@version` in the `create` command
+    .replace('@latest', () => (isYarn1 ? '' : '@latest'))
+    .replace(/^npm exec/, () => {
+      // Prefer `pnpm dlx`, `yarn dlx`, or `bun x`
+      if (pkgManager === 'pnpm')
+        return 'pnpm dlx'
 
-        if (pkgManager === 'yarn' && !isYarn1)
-          return 'yarn dlx'
+      if (pkgManager === 'yarn' && !isYarn1)
+        return 'yarn dlx'
 
-        if (pkgManager === 'bun')
-          return 'bun x'
+      if (pkgManager === 'bun')
+        return 'bun x'
 
-        // Use `npm exec` in all other cases,
-        // including Yarn 1.x and other custom npm clients.
-        return 'npm exec'
-      })
+      // Use `npm exec` in all other cases,
+      // including Yarn 1.x and other custom npm clients.
+      return 'npm exec'
+    })
 
   let [command, ...args] = fullCustomCommand.split(' ')
 
@@ -69,18 +69,15 @@ export async function renderNuxtTemplate(ctx: NuxtContext) {
   // install dependencies
   runCommand(pmDetection, 'install', [], projectRoot)
 
+  // copy/replace resources
+  prepareProject(ctx)
+
   // install nuxt eslint: https://eslint.nuxt.com/packages/module#quick-setup
   if (nuxtPreset !== 'nuxt-default') {
     // we need eslint before executing the prepare command:
     // once prepare command run, the eslint.config.mjs file will be created
     runCommand(pmDetection, 'execute', ['nuxi', 'module', 'add', 'eslint'], projectRoot)
   }
-
-  // copy/replace resources
-  prepareProject(ctx)
-
-  // run prepare command
-  runCommand(pmDetection, 'run', ['prepare'], projectRoot)
 }
 
 function configurePackageJson({
@@ -113,14 +110,12 @@ function configurePackageJson({
 
   // prepare devDependencies
   const devDependencies: PackageJsonEntry[] = [
+    ['@mdi/font', versions['@mdi/font']],
     ['@nuxt/fonts', versions['@nuxt/fonts']],
     ['sass-embedded', versions['sass-embedded']],
     ['typescript', versions.typescript],
     ['vue-tsc', versions["vue-tsc"]],
   ]
-  if (nuxtPreset !== 'nuxt-default') {
-    devDependencies.push(['eslint', versions.eslint])
-  }
   if (useNuxtModule) {
     devDependencies.push(['vuetify-nuxt-module', versions["vuetify-nuxt-module"]])
   }
@@ -153,7 +148,12 @@ function configureVuetify(ctx: NuxtContext, nuxtConfig: ReturnType<typeof parseM
       noExternal: ['vuetify'],
     },
   }
-  config.css = ['vuetify/styles']
+  config.css = []
+  // vuetify-nuxt-module will detect @mdi/font adding to the css array
+  if (!ctx.useNuxtModule) {
+    config.css.push('@mdi/font/css/materialdesignicons.css')
+  }
+  config.css.push('vuetify/styles')
   // todo: add only required fonts
   addNuxtModule(nuxtConfig, '@nuxt/fonts')
   return config
@@ -299,11 +299,13 @@ function prepareVuetifyModule(
   nuxtConfig: ReturnType<typeof parseModule>,
 ) {
   // prepare nuxt config
+  const config = configureVuetify(ctx, nuxtConfig)
+
+  // enable auto import and include styles
   const styles = ctx.nuxtPreset !== 'nuxt-essentials' ? true : {
     configFile: 'assets/settings.scss',
   }
-  const config = configureVuetify(ctx, nuxtConfig)
-  config.vuetify= { styles }
+  config.vuetify= { autoImport: true, styles }
 }
 
 function prepareProject(ctx: NuxtContext) {
