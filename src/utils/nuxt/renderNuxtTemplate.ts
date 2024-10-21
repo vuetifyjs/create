@@ -352,7 +352,7 @@ function prepareProject(ctx: NuxtContext) {
   // add some hints to the nuxt config
   // https://github.com/Pinegrow/pg-nuxt-vuetify-tailwindcss/blob/00fac86769bc43e034b90dacfd03becc92b93b53/nuxt.config.ts#L100-L104
   if (useNuxtModule) {
-    code = code.replace('ssrClientHints:', `// check https://vuetify-nuxt-module.netlify.app/guide/server-side-rendering.html
+    code = code.replace('ssrClientHints:', `// check https://nuxt.vuetifyjs.com/guide/server-side-rendering.html
       ssrClientHints:`)
     code = code.replace('styles:', `// /* If customizing sass global variables ($utilities, $reset, $color-pack, $body-font-family, etc) */
       // disableVuetifyStyles: true,
