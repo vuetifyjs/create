@@ -307,7 +307,7 @@ function prepareVuetifyModule(
   const styles = ctx.nuxtPreset !== 'nuxt-essentials' ? true : {
     configFile: 'assets/settings.scss',
   }
-  config.vuetify= { autoImport: true, styles }
+  config.vuetify = { autoImport: true, styles }
 }
 
 function prepareProject(ctx: NuxtContext) {
