@@ -8,7 +8,7 @@ async function bundleMain () {
     format: 'esm',
     platform: 'node',
     target: 'node18',
-    external: ['validate-npm-package-name', 'kolorist', 'minimist', 'prompts'],
+    external: ['package-browser-detector', 'magicast', 'validate-npm-package-name', 'kolorist', 'minimist', 'prompts'],
   })
 }
 
