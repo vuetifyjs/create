@@ -64,12 +64,12 @@ export function runCommand(
   }
 
   const run = spawnSync(
-      runCommand,
-      runArgs.filter(Boolean), {
-        cwd,
-        stdio: ['inherit', 'inherit', 'pipe'],
-        shell: true,
-      },
+    runCommand,
+    runArgs.filter(Boolean), {
+      cwd,
+      stdio: ['inherit', 'inherit', 'pipe'],
+      shell: true,
+    },
   )
   if (run.error) {
     throw run.error
