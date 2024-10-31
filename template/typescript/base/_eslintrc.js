@@ -4,17 +4,20 @@
  * ESLint configuration file.
  */
 
-module.exports = {
-  root: true,
-  env: {
-    node: true,
+import pluginVue from 'eslint-plugin-vue'
+import vueTsEslintConfig from '@vue/eslint-config-typescript'
+
+export default [
+  {
+    name: 'app/files-to-lint',
+    files: ['**/*.{ts,mts,tsx,vue}'],
   },
-  extends: [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/eslint-config-typescript',
-  ],
-  rules: {
-    'vue/multi-word-component-names': 'off',
+
+  {
+    name: 'app/files-to-ignore',
+    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
-}
+
+  ...pluginVue.configs['flat/essential'],
+  ...vueTsEslintConfig(),
+]
