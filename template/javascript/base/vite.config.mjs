@@ -1,5 +1,6 @@
 // Plugins
 import Components from 'unplugin-vue-components/vite'
+import eslint from 'vite-plugin-eslint2';
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
@@ -12,6 +13,11 @@ import { fileURLToPath, URL } from 'node:url'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    eslint({
+			fix: true,
+			exclude: ['node_modules/**'],
+			include: ['**/*.{js,mjs,vue}'],
+		}),
     VueRouter(),
     Vue({
       template: { transformAssetUrls }
