@@ -3,7 +3,7 @@ import eslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import pluginVue from 'eslint-plugin-vue';
 // import vuetify from 'eslint-config-vuetify';
-import AutoImportJson from './.eslintrc-auto-import.json' assert { type: "json" };
+import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' };
 
 
 // TODO: Need to update eslint-config-vuetify before adding
