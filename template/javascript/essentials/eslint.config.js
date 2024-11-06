@@ -2,7 +2,7 @@
 import eslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import pluginVue from 'eslint-plugin-vue';
-// import vuetify from 'eslint-config-vuetify';
+import vuetify from 'eslint-config-vuetify';
 import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' };
 
 
@@ -10,7 +10,7 @@ import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' 
 
 export default [
   eslint.configs.recommended,
-   // ...vuetify,
+   ...vuetify,
   ...pluginVue.configs['flat/essential'],
 
   {

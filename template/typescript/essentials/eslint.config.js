@@ -5,15 +5,13 @@ import pluginVue from 'eslint-plugin-vue';
 import tseslint from 'typescript-eslint';
 import typescript from '@typescript-eslint/eslint-plugin';
 import vueTsEslintConfig from '@vue/eslint-config-typescript';
-// import vuetify from 'eslint-config-vuetify';
+import vuetify from 'eslint-config-vuetify';
 import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' };
 
 
-// TODO: Need to update eslint-config-vuetify before adding
-
 export default tseslint.config(
   eslint.configs.recommended,
-  // ...vuetify,
+  ...vuetify,
   ...pluginVue.configs['flat/essential'],
   ...tseslint.configs.recommended,
   ...vueTsEslintConfig(),
