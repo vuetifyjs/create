@@ -9,25 +9,25 @@ export default [
   ...pluginVue.configs['flat/essential'],
 
   {
-		name: 'app/files-to-ignore',
-		ignores: [
-			'**/dist/**',
-			'**/dist-ssr/**',
-			'**/coverage/**',
-		],
-	},
+    name: 'app/files-to-ignore',
+    ignores: [
+      '**/dist/**',
+      '**/dist-ssr/**',
+      '**/coverage/**',
+    ],
+  },
 
   {
-		name: 'app/files-to-lint',
+    name: 'app/files-to-lint',
     files: ['**/*.{js,mjs,jsx,vue}'],
     plugins: {
-			pluginVue,
-			import: importPlugin,
-		},
+      pluginVue,
+      import: importPlugin,
+    },
     rules: {
       ...eslint.configs.recommended.rules,
 
-			'vue/multi-word-component-names': 0,
+      'vue/multi-word-component-names': 0,
     }
   },
 ];

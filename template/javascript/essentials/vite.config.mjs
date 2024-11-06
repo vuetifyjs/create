@@ -16,10 +16,10 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   plugins: [
     eslint({
-			fix: true,
-			exclude: ['node_modules/**'],
-			include: ['**/*.{js,mjs,vue}'],
-		}),
+      fix: true,
+      exclude: ['node_modules/**'],
+      include: ['**/*.{js,mjs,vue}'],
+    }),
     VueRouter(),
     Layouts(),
     Vue({

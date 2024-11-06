@@ -14,24 +14,24 @@ export default [
   ...pluginVue.configs['flat/essential'],
 
   {
-		name: 'app/files-to-ignore',
-		ignores: [
-			'**/dist/**',
-			'**/dist-ssr/**',
-			'**/coverage/**',
-		],
-	},
+    name: 'app/files-to-ignore',
+    ignores: [
+      '**/dist/**',
+      '**/dist-ssr/**',
+      '**/coverage/**',
+    ],
+  },
 
   {
-		name: 'app/files-to-lint',
+    name: 'app/files-to-lint',
     files: ['**/*.{js,mjs,jsx,vue}'],
     languageOptions: {
-			...AutoImportJson,
-		},
+      ...AutoImportJson,
+    },
     plugins: {
-			pluginVue,
-			import: importPlugin,
-		},
+      pluginVue,
+      import: importPlugin,
+    },
     rules: {
       ...eslint.configs.recommended.rules,
 
