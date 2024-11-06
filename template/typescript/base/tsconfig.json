@@ -24,6 +24,8 @@
     "skipLibCheck": true
   },
   "include": [
+    "src/App.vue",
+		"src/main.ts",
     "src/**/*",
     "src/**/*.vue"
   ],
