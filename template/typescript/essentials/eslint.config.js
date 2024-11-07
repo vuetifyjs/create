@@ -29,6 +29,7 @@ export default tseslint.config(
   {
     name: 'app/files-to-ignore',
     ignores: [
+      'vite.config.*',
       '**/*.d.ts',
       '**/dist/**',
       '**/dist-ssr/**',

@@ -13,12 +13,14 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...vueTsEslintConfig(),
   includeIgnoreFile(gitignorePath),
-	{
-		// your overrides
-	},
+  {
+    // your overrides
+  },
   {
     name: 'app/files-to-ignore',
     ignores: [
+      'vite.config.*',
+      '**/*.d.ts',
       '**/dist/**',
       '**/dist-ssr/**',
       '**/coverage/**',
