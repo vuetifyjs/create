@@ -1,13 +1,16 @@
-// eslint.config.js
-import eslint from '@eslint/js';
-import importPlugin from 'eslint-plugin-import';
-import pluginVue from 'eslint-plugin-vue';
-import tseslint from 'typescript-eslint';
-import typescript from '@typescript-eslint/eslint-plugin';
-import vueTsEslintConfig from '@vue/eslint-config-typescript';
-import vuetify from 'eslint-config-vuetify';
-import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' };
-
+/**
+ * eslint.config.js
+ *
+ * https://eslint.org/, https://eslint.vuejs.org/user-guide/
+ */
+import eslint from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
+import pluginVue from 'eslint-plugin-vue'
+import tseslint from 'typescript-eslint'
+import typescript from '@typescript-eslint/eslint-plugin'
+import vueTsEslintConfig from '@vue/eslint-config-typescript'
+import vuetify from 'eslint-config-vuetify'
+import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' }
 
 export default tseslint.config(
   eslint.configs.recommended,
