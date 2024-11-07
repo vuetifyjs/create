@@ -7,12 +7,12 @@ import eslint from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
 import pluginVue from 'eslint-plugin-vue'
 import vuetify from 'eslint-config-vuetify'
-import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' }
+import fs from 'node:fs'
+
+const AutoImportJson = JSON.parse(fs.readFileSync(new URL('./.eslintrc-auto-import.json', import.meta.url), 'utf-8'))
 
 export default [
-  eslint.configs.recommended,
    ...vuetify,
-  ...pluginVue.configs['flat/essential'],
 
   {
     name: 'app/files-to-ignore',

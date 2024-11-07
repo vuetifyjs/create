@@ -8,20 +8,17 @@ import importPlugin from 'eslint-plugin-import'
 import pluginVue from 'eslint-plugin-vue'
 import tseslint from 'typescript-eslint'
 import typescript from '@typescript-eslint/eslint-plugin'
-import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import vuetify from 'eslint-config-vuetify'
-import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' }
 import { includeIgnoreFile } from '@eslint/compat';
 import { fileURLToPath, URL } from 'node:url'
+import fs from 'node:fs'
 
+const AutoImportJson = JSON.parse(fs.readFileSync(new URL('./.eslintrc-auto-import.json', import.meta.url), 'utf-8'))
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
 export default tseslint.config(
-  eslint.configs.recommended,
   ...vuetify,
-  ...pluginVue.configs['flat/essential'],
   ...tseslint.configs.recommended,
-  ...vueTsEslintConfig(),
   includeIgnoreFile(gitignorePath),
 	{
 		// your overrides
