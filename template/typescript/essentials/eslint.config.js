@@ -11,6 +11,10 @@ import typescript from '@typescript-eslint/eslint-plugin'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import vuetify from 'eslint-config-vuetify'
 import AutoImportJson from './.eslintrc-auto-import.json' assert { type: 'json' }
+import { includeIgnoreFile } from '@eslint/compat';
+import { fileURLToPath, URL } from 'node:url'
+
+const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -18,9 +22,14 @@ export default tseslint.config(
   ...pluginVue.configs['flat/essential'],
   ...tseslint.configs.recommended,
   ...vueTsEslintConfig(),
+  includeIgnoreFile(gitignorePath),
+	{
+		// your overrides
+	},
   {
     name: 'app/files-to-ignore',
     ignores: [
+      '**/*.d.ts',
       '**/dist/**',
       '**/dist-ssr/**',
       '**/coverage/**',
@@ -35,7 +44,7 @@ export default tseslint.config(
       sourceType: 'module',
       parserOptions: {
         parser: tseslint.parser,
-        project: './tsconfig.json',
+        project: ['./tsconfig.json', './tsconfig.node.json'],
         extraFileExtensions: ['.vue'],
         sourceType: 'module',
       },

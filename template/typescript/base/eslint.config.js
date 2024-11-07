@@ -12,6 +12,10 @@ export default tseslint.config(
   ...pluginVue.configs['flat/essential'],
   ...tseslint.configs.recommended,
   ...vueTsEslintConfig(),
+  includeIgnoreFile(gitignorePath),
+	{
+		// your overrides
+	},
   {
     name: 'app/files-to-ignore',
     ignores: [
