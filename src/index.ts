@@ -5,12 +5,14 @@ import { mkdirSync, rmSync, writeFileSync } from 'fs'
 
 // Types
 import type { ContextState } from './utils/prompts'
+import type { NuxtPresetName } from './utils/presets'
 
 // Utils
 import { initPrompts } from './utils/prompts'
 import { red } from 'kolorist'
 import minimist from 'minimist'
 import { installDependencies, renderTemplate } from './utils'
+import { renderNuxtTemplate } from './utils/nuxt/renderNuxtTemplate'
 
 const validPresets = ['base', 'custom', 'default', 'essentials']
 
@@ -48,6 +50,12 @@ async function run () {
     usePackageManager,
     installDependencies: installDeps,
     usePreset,
+    useStore,
+    useEslint,
+    useNuxtV4Compat,
+    useNuxtModule,
+    useNuxtSSR,
+    useNuxtSSRClientHints,
   } = await initPrompts(context)
 
   const projectRoot = join(cwd, projectName)
@@ -57,30 +65,51 @@ async function run () {
     rmSync(projectRoot, { recursive: true })
   }
 
-  // Create project directory
-  mkdirSync(projectRoot)
+  const preset = context.usePreset ?? usePreset
 
-  // Create base package.json
-  writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify({ name: projectName }, null, 2))
-
-  const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
-  let templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template', jsOrTs)
-
-  console.log('\n◌ Generating scaffold...')
-
-  renderTemplate(resolve(templatePath, 'default'), projectRoot)
-
-  if (['base', 'essentials'].includes(usePreset)) {
-    renderTemplate(resolve(templatePath, 'base'), projectRoot)
+  if (preset.startsWith('nuxt-')) {
+    const templateRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../template/typescript')
+    const templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template/typescript/nuxt')
+    // we are going to run Nuxi CLI that will handle the creation for us
+    await renderNuxtTemplate({
+      cwd,
+      projectName,
+      projectRoot,
+      templateRoot,
+      templatePath,
+      nuxtPreset: preset as NuxtPresetName,
+      useNuxtV4Compat,
+      useNuxtModule,
+      useNuxtSSR,
+      useNuxtSSRClientHints,
+    })
   }
+  else {
+    // Create project directory
+    mkdirSync(projectRoot)
 
-  if (['essentials', 'recommended'].includes(usePreset)) {
-    renderTemplate(resolve(templatePath, 'essentials'), projectRoot)
-  }
+    // Create base package.json
+    writeFileSync(resolve(projectRoot, 'package.json'), JSON.stringify({ name: projectName }, null, 2))
 
-  if (usePackageManager && installDeps) {
-    console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
-    installDependencies(projectRoot, usePackageManager)
+    console.log('\n◌ Generating scaffold...')
+
+    const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
+    let templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template', jsOrTs)
+
+    renderTemplate(resolve(templatePath, 'default'), projectRoot)
+
+    if (['base', 'essentials'].includes(usePreset)) {
+      renderTemplate(resolve(templatePath, 'base'), projectRoot)
+    }
+
+    if (['essentials', 'recommended'].includes(usePreset)) {
+      renderTemplate(resolve(templatePath, 'essentials'), projectRoot)
+    }
+
+    if (usePackageManager && installDeps) {
+      console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
+      installDependencies(projectRoot, usePackageManager)
+    }
   }
 
   console.log(`\n${projectName} has been generated at ${projectRoot}\n`)
@@ -91,6 +120,7 @@ run()
     console.log('Discord community: https://community.vuetifyjs.com')
     console.log('Github: https://github.com/vuetifyjs/vuetify')
     console.log('Support Vuetify: https://github.com/sponsors/johnleider')
+    process.exit(0)
   })
   .catch((err) => {
     console.error(`\n${red('✖')} ${err}\n`)
