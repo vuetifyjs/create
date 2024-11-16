@@ -20,4 +20,17 @@ export default [
 
   ...pluginVue.configs['flat/recommended'],
   ...vueTsEslintConfig(),
+
+  {
+    rules: {
+      '@typescript-eslint/no-unused-expressions': [
+        'error',
+        {
+          allowShortCircuit: true,
+          allowTernary: true,
+        },
+      ],
+      'vue/multi-word-component-names': 'off',
+    }
+  }
 ]
