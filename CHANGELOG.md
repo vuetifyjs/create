@@ -1,5 +1,14 @@
 
 
+# [2.3.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.6...v2.3.0) (2024-11-16)
+
+
+### Features
+
+* add modern sass vite options ([#60](https://github.com/vuetifyjs/create-vuetify/issues/60)) ([c8ef277](https://github.com/vuetifyjs/create-vuetify/commit/c8ef2779cde65ffa5ada7c53c4a1e3c36b8f893f))
+* add Nuxt template ([#61](https://github.com/vuetifyjs/create-vuetify/issues/61)) ([b75e547](https://github.com/vuetifyjs/create-vuetify/commit/b75e547360a3b1835d4f5509da1386b02a181921))
+* update to latest vue install defaults ([#62](https://github.com/vuetifyjs/create-vuetify/issues/62)) ([d44e563](https://github.com/vuetifyjs/create-vuetify/commit/d44e5636e391128309ffd9eec2ec471024fea69f))
+
 ## [2.2.6](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.5...v2.2.6) (2024-07-10)
 
 
