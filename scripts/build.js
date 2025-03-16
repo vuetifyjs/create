@@ -1,6 +1,6 @@
 import { build } from 'esbuild'
 
-async function bundleMain () {
+async function bundleMain() {
   await build({
     bundle: true,
     entryPoints: ['src/index.ts'],
@@ -12,7 +12,7 @@ async function bundleMain () {
   })
 }
 
-async function bundle () {
+async function bundle() {
   await bundleMain()
 }
 
