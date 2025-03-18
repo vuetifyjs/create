@@ -26,28 +26,25 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "kolorist": "^1.5.1",
-    "magicast": "^0.3.4",
-    "minimist": "^1.2.6",
-    "package-manager-detector": "^0.2.2",
+    "kolorist": "^1.8.0",
+    "magicast": "^0.3.5",
+    "minimist": "^1.2.8",
+    "package-manager-detector": "^1.0.0",
     "prompts": "^2.4.2",
-    "validate-npm-package-name": "^4.0.0"
+    "validate-npm-package-name": "^6.0.0"
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "^8.0.1",
+    "@release-it/conventional-changelog": "^10.0.0",
     "@stylistic/eslint-plugin": "^4.2.0",
-    "@types/minimist": "^1.2.2",
-    "@types/node": "^20.12.8",
-    "@types/prompts": "^2.0.14",
-    "@types/validate-npm-package-name": "^4.0.0",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^22.13.10",
+    "@types/prompts": "^2.4.9",
+    "@types/validate-npm-package-name": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
-    "esbuild": "^0.14.47",
-    "esbuild-jest": "^0.5.0",
+    "esbuild": "^0.25.1",
     "eslint": "^9.22.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "release-it": "^17.0.3",
+    "release-it": "^18.1.2",
     "typescript": "^5.8.2"
   },
   "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"

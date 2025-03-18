@@ -39,7 +39,7 @@ type DefinedContextState = { [P in keyof ContextState]-?: ContextState[P] }
 const initPrompts = async (context: ContextState) => {
 
   let answers: prompts.Answers<
-      'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtV4Compat' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
+    'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtV4Compat' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
   >
 
   if (context.usePreset) {
@@ -55,10 +55,16 @@ const initPrompts = async (context: ContextState) => {
       type: 'text',
       message: 'Project name:',
       initial: 'vuetify-project',
+      format: (v: string) => v.trim(),
       validate: (v: string) => {
-        const { errors } = validate(String(v).trim())
+        const { errors, warnings, validForNewPackages: isValid } = validate(String(v).trim())
 
-        return !(errors && errors.length) || `Package ${errors[0]}`
+        const error = isValid ? null : errors ? errors[0] : warnings![0]
+
+        if (!isValid) {
+          return `Package ${error}`
+        }
+        return true
       },
     },
     {
@@ -70,8 +76,8 @@ const initPrompts = async (context: ContextState) => {
         const projectPath = join(context.cwd, projectName)
 
         return (
-            !existsSync(projectPath) ||
-            readdirSync(projectPath).length === 0
+          !existsSync(projectPath) ||
+          readdirSync(projectPath).length === 0
         ) ? null : 'toggle'
       },
       message: (prev: string) => `The project path: ${resolve(context.cwd, prev)} already exists, would you like to overwrite this directory?`,
