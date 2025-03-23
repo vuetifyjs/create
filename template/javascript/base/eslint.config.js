@@ -1,5 +1,8 @@
 import js from '@eslint/js'
-import pluginVue from 'eslint-plugin-vue'
+import vue from 'eslint-plugin-vue'
+import vuetify from 'eslint-plugin-vuetify'
+import globals from 'globals'
+
 
 export default [
   {
@@ -13,11 +16,18 @@ export default [
   },
 
   js.configs.recommended,
-  ...pluginVue.configs['flat/recommended'],
+  ...vue.configs['flat/recommended'],
+  ...vuetify.configs['flat/base'],
 
   {
     rules: {
       'vue/multi-word-component-names': 'off',
     },
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser
+      }
+    }
   }
 ]

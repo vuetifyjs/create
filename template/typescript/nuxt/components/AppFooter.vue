@@ -34,7 +34,10 @@ const items = shallowRef([
 </script>
 
 <template>
-  <v-footer height="40" app>
+  <v-footer
+    height="40"
+    app
+  >
     <NuxtLink
       v-for="item in items"
       :key="item.title"
