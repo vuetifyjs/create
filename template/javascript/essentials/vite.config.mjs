@@ -69,6 +69,9 @@ export default defineConfig({
       sass: {
         api: 'modern-compiler',
       },
+      scss: {
+        api: 'modern-compiler',
+      },
     },
   },
 })
