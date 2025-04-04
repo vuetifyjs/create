@@ -10,8 +10,8 @@
   "dependencies": {
     "@mdi/font": "7.4.47",
     "roboto-fontface": "*",
-    "vue": "^3.4.31",
-    "vuetify": "^3.6.14"
+    "vue": "^3.5.13",
+    "vuetify": "^3.8.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
@@ -19,7 +19,7 @@
     "sass-embedded": "^1.77.8",
     "unplugin-fonts": "^1.1.1",
     "unplugin-vue-components": "^0.27.2",
-    "vite-plugin-vuetify": "^2.0.3",
+    "vite-plugin-vuetify": "^2.1.1",
     "vite": "^5.4.0"
   }
 }
