@@ -53,6 +53,9 @@ export default defineConfig({
       },
     }),
   ],
+  optimizeDeps: {
+    exclude: ['vuetify'],
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {

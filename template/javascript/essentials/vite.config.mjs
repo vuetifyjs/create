@@ -46,6 +46,9 @@ export default defineConfig({
       vueTemplate: true,
     }),
   ],
+  optimizeDeps: {
+    exclude: ['vuetify'],
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {
