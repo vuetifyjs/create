@@ -8,5 +8,5 @@ export const versions = {
   'vuetify-nuxt-module': '^0.18.6',
   'upath': '^2.0.1',
   '@mdi/font': '^7.4.47',
-  '@nuxt/fonts': '^0.10.0',
+  '@nuxt/fonts': '^0.11.1',
 } as const
