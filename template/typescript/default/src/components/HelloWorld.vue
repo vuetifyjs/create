@@ -49,11 +49,11 @@
             </template>
 
             <v-overlay
-              opacity=".12"
-              scrim="primary"
               contained
               model-value
+              opacity=".12"
               persistent
+              scrim="primary"
             />
           </v-card>
         </v-col>
@@ -73,11 +73,11 @@
             variant="text"
           >
             <v-overlay
-              opacity=".06"
-              scrim="primary"
               contained
               model-value
+              opacity=".06"
               persistent
+              scrim="primary"
             />
           </v-card>
         </v-col>
@@ -97,11 +97,11 @@
             variant="text"
           >
             <v-overlay
-              opacity=".06"
-              scrim="primary"
               contained
               model-value
+              opacity=".06"
               persistent
+              scrim="primary"
             />
           </v-card>
         </v-col>
@@ -121,11 +121,11 @@
             variant="text"
           >
             <v-overlay
-              opacity=".06"
-              scrim="primary"
               contained
               model-value
+              opacity=".06"
               persistent
+              scrim="primary"
             />
           </v-card>
         </v-col>
@@ -145,11 +145,11 @@
             variant="text"
           >
             <v-overlay
-              opacity=".06"
-              scrim="primary"
               contained
               model-value
+              opacity=".06"
               persistent
+              scrim="primary"
             />
           </v-card>
         </v-col>

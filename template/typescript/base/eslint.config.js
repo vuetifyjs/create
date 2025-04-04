@@ -42,8 +42,8 @@ export default defineConfigWithVueTs(
       languageOptions: {
         globals: {
           ...globals.node,
-          ...globals.browser
-        }
-      }
-    }
+          ...globals.browser,
+        },
+      },
+    },
   ])

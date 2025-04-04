@@ -2,7 +2,7 @@ import { defineNuxtModule } from '@nuxt/kit'
 import type { Options as ModuleOptions } from '@vuetify/loader-shared'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import path from 'upath'
-import { resolveVuetifyBase, isObject } from '@vuetify/loader-shared'
+import { isObject, resolveVuetifyBase } from '@vuetify/loader-shared'
 import { pathToFileURL } from 'node:url'
 
 export type { ModuleOptions }
@@ -14,7 +14,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'vuetify',
   },
   defaults: () => ({ styles: true }),
-  setup(options, nuxt) {
+  setup (options, nuxt) {
     let configFile: string | undefined
     const vuetifyBase = resolveVuetifyBase()
     const noneFiles = new Set<string>()
@@ -23,7 +23,7 @@ export default defineNuxtModule<ModuleOptions>({
     const PREFIX = 'vuetify-styles/'
     const SSR_PREFIX = `/@${PREFIX}`
 
-    nuxt.hook('vite:extendConfig', (viteInlineConfig) => {
+    nuxt.hook('vite:extendConfig', viteInlineConfig => {
       // add vuetify transformAssetUrls
       viteInlineConfig.vue ??= {}
       viteInlineConfig.vue.template ??= {}
@@ -94,7 +94,7 @@ export default defineNuxtModule<ModuleOptions>({
 
           return undefined
         },
-        load(id){
+        load (id){
           if (sassVariables) {
             const target = id.startsWith(PREFIX)
               ? path.resolve(vuetifyBase, id.slice(PREFIX.length))
@@ -116,7 +116,7 @@ export default defineNuxtModule<ModuleOptions>({
         },
       })
     })
-  }
+  },
 })
 
 function isSubdir (root: string, test: string) {

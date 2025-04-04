@@ -17,7 +17,7 @@ export default defineConfig({
     VueRouter(),
     Layouts(),
     Vue({
-      template: { transformAssetUrls }
+      template: { transformAssetUrls },
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
@@ -49,7 +49,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
     extensions: [
       '.js',

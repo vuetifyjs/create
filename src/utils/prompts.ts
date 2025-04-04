@@ -1,5 +1,5 @@
 // Node
-import { resolve, join } from 'path'
+import { join, resolve } from 'path'
 import { existsSync, readdirSync } from 'fs'
 
 // Types
@@ -98,7 +98,7 @@ const initPrompts = async (context: ContextState) => {
     },
     {
       name: 'useTypeScript',
-      type: (usePreset) => {
+      type: usePreset => {
         const p = context.usePreset ?? usePreset
         return p.startsWith('nuxt-') || context.useTypeScript ? null : 'toggle'
       },

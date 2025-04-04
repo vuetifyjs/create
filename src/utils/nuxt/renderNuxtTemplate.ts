@@ -13,7 +13,7 @@ import { detect } from 'package-manager-detector'
 import { generateCode, parseModule } from 'magicast'
 import { addNuxtModule, getDefaultExportOptions } from 'magicast/helpers'
 
-export async function renderNuxtTemplate(ctx: NuxtContext) {
+export async function renderNuxtTemplate (ctx: NuxtContext) {
   const {
     cwd,
     projectName,
@@ -49,7 +49,7 @@ export async function renderNuxtTemplate(ctx: NuxtContext) {
       return 'npm exec'
     })
 
-  let [command, ...args] = fullCustomCommand.split(' ')
+  const [command, ...args] = fullCustomCommand.split(' ')
 
   const nuxiCli = spawnSync(command, args, {
     cwd,
@@ -80,7 +80,7 @@ export async function renderNuxtTemplate(ctx: NuxtContext) {
   }
 }
 
-function configurePackageJson({
+function configurePackageJson ({
   projectName,
   projectRoot,
   useNuxtModule,
@@ -114,15 +114,15 @@ function configurePackageJson({
     ['@nuxt/fonts', versions['@nuxt/fonts']],
     ['sass-embedded', versions['sass-embedded']],
     ['typescript', versions.typescript],
-    ['vue-tsc', versions["vue-tsc"]],
+    ['vue-tsc', versions['vue-tsc']],
   ]
   if (useNuxtModule) {
-    devDependencies.push(['vuetify-nuxt-module', versions["vuetify-nuxt-module"]])
+    devDependencies.push(['vuetify-nuxt-module', versions['vuetify-nuxt-module']])
   }
   else {
     devDependencies.push(['upath', versions['upath']])
-    devDependencies.push(['@vuetify/loader-shared', versions["@vuetify/loader-shared"]])
-    devDependencies.push(['vite-plugin-vuetify', versions["vite-plugin-vuetify"]])
+    devDependencies.push(['@vuetify/loader-shared', versions['@vuetify/loader-shared']])
+    devDependencies.push(['vite-plugin-vuetify', versions['vite-plugin-vuetify']])
   }
   if (devDependencies.length) {
     addPackageObject('devDependencies', devDependencies, pkg)
@@ -135,7 +135,7 @@ function configurePackageJson({
   fs.writeFileSync(packageJson, JSON.stringify(pkg, null, 2), 'utf-8')
 }
 
-function configureVuetify(ctx: NuxtContext, nuxtConfig: ReturnType<typeof parseModule>) {
+function configureVuetify (ctx: NuxtContext, nuxtConfig: ReturnType<typeof parseModule>) {
   const config = getDefaultExportOptions(nuxtConfig)
   config.ssr = ctx.useNuxtSSR
   config.features = {
@@ -161,7 +161,7 @@ function configureVuetify(ctx: NuxtContext, nuxtConfig: ReturnType<typeof parseM
   return config
 }
 
-function copyResources(
+function copyResources (
   ctx: NuxtContext,
   rootPath: string,
   templateDir: string,
@@ -220,13 +220,13 @@ function copyResources(
     const templateModulesDir = path.join(templateDir, 'modules')
     fs.mkdirSync(modulesDir)
     fs.copyFileSync(
-        path.resolve(templateModulesDir, 'vuetify.ts'),
-        path.resolve(modulesDir, 'vuetify.ts'),
+      path.resolve(templateModulesDir, 'vuetify.ts'),
+      path.resolve(modulesDir, 'vuetify.ts'),
     )
     // vuetify plugin
     editFile(
       path.join(templatePluginsDir, 'vuetify.ts'),
-      (content) => {
+      content => {
         return useNuxtSSR ? content : content.replace('ssr: true,', 'ssr: false,')
       },
       path.resolve(pluginsDir, 'vuetify.ts'),
@@ -269,7 +269,7 @@ function copyResources(
   )
 }
 
-function prepareNuxtModule(
+function prepareNuxtModule (
   ctx: NuxtContext,
   nuxtConfig: ReturnType<typeof parseModule>,
 ) {
@@ -296,7 +296,7 @@ function prepareNuxtModule(
   )
 }
 
-function prepareVuetifyModule(
+function prepareVuetifyModule (
   ctx: NuxtContext,
   nuxtConfig: ReturnType<typeof parseModule>,
 ) {
@@ -310,7 +310,7 @@ function prepareVuetifyModule(
   config.vuetify = { autoImport: true, styles }
 }
 
-function prepareProject(ctx: NuxtContext) {
+function prepareProject (ctx: NuxtContext) {
   const {
     projectRoot,
     templatePath,
@@ -374,4 +374,3 @@ function prepareProject(ctx: NuxtContext) {
   // prepare resources
   copyResources(ctx, rootPath, templateDir)
 }
-

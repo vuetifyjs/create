@@ -94,7 +94,7 @@ async function run () {
     console.log('\n◌ Generating scaffold...')
 
     const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
-    let templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template', jsOrTs)
+    const templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template', jsOrTs)
 
     renderTemplate(resolve(templatePath, 'default'), projectRoot)
 
@@ -122,7 +122,7 @@ run()
     console.log('Support Vuetify: https://github.com/sponsors/johnleider')
     process.exit(0)
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(`\n${red('✖')} ${err}\n`)
     process.exit(1)
   })
