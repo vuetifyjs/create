@@ -54,7 +54,13 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    exclude: ['vuetify'],
+    exclude: [
+      'vuetify',
+      'vue-router',
+      'unplugin-vue-router/runtime',
+      'unplugin-vue-router/data-loaders',
+      'unplugin-vue-router/data-loaders/basic',
+    ],
   },
   define: { 'process.env': {} },
   resolve: {
