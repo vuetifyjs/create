@@ -1,17 +1,18 @@
 <template>
-  <v-container class="fill-height" width="900">
+  <v-container class="fill-height" max-width="900">
     <div>
       <v-img
+        class="mb-4"
         height="150"
-        src="~/assets/logo.png"
+        src="@/assets/logo.png"
       />
 
-      <div class="mt-4 text-center">
+      <div class="mb-8 text-center">
         <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
         <h1 class="text-h2 font-weight-bold">Vuetify</h1>
       </div>
 
-      <v-row class="mt-8">
+      <v-row>
         <v-col cols="12">
           <v-card
             class="py-4"
