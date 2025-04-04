@@ -19,8 +19,7 @@
             image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
             prepend-icon="mdi-rocket-launch-outline"
             rounded="lg"
-            variant="outlined"
-            style="background: rgba(var(--v-theme-primary), 0.12)"
+            variant="tonal"
           >
             <template #image>
               <v-img position="top right" />
@@ -50,8 +49,7 @@
             rel="noopener noreferrer"
             rounded="lg"
             target="_blank"
-            variant="text"
-            style="background: rgba(var(--v-theme-primary), 0.06)"
+            variant="tonal"
           />
         </v-col>
       </v-row>
