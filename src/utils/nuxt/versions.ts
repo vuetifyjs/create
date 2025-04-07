@@ -1,5 +1,5 @@
 export const versions = {
-  'vuetify': '^3.8.0',
+  'vuetify': '^3.8.1',
   'typescript': '^5.6.3',
   'vue-tsc': '^2.1.6',
   'sass-embedded': '^1.86.3',

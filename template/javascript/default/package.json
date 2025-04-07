@@ -11,7 +11,7 @@
     "@mdi/font": "7.4.47",
     "roboto-fontface": "*",
     "vue": "^3.5.13",
-    "vuetify": "^3.8.0"
+    "vuetify": "^3.8.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
