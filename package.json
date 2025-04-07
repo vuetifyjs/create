@@ -43,6 +43,7 @@
     "esbuild": "^0.25.1",
     "eslint": "^9.23.0",
     "eslint-config-vuetify": "^3.0.3",
+    "nypm": "^0.6.0",
     "release-it": "^18.1.2",
     "typescript": "^5.8.2"
   },

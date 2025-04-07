@@ -9,6 +9,7 @@ import type { Options as PromptOptions } from 'prompts'
 import { presets } from './presets'
 import { red } from 'kolorist'
 import prompts from 'prompts'
+import { packageManager as defaultPackageManager } from './installDependencies'
 import validate from 'validate-npm-package-name'
 
 type ContextState = {
@@ -114,11 +115,11 @@ const initPrompts = async (context: ContextState) => {
         return p.startsWith('nuxt-') ? null : 'select'
       },
       message: 'Would you like to install dependencies with yarn, npm, pnpm, or bun?',
-      initial: 0,
+      initial: defaultPackageManager === 'bun' ? 3 : 0,
       choices: [
-        { title: 'yarn', value: 'yarn' },
-        { title: 'npm', value: 'npm' },
         { title: 'pnpm', value: 'pnpm' },
+        { title: 'npm', value: 'npm' },
+        { title: 'yarn', value: 'yarn' },
         { title: 'bun', value: 'bun' },
         { title: 'none', value: null },
       ],
