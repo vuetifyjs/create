@@ -49,8 +49,8 @@ importers:
         specifier: ^9.23.0
         version: 9.23.0(jiti@2.4.2)
       eslint-config-vuetify:
-        specifier: ^3.0.2
-        version: 3.0.2(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)(vue-eslint-parser@10.1.2(eslint@9.23.0(jiti@2.4.2)))
+        specifier: ^3.0.3
+        version: 3.0.3(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)(vue-eslint-parser@10.1.2(eslint@9.23.0(jiti@2.4.2)))
       release-it:
         specifier: ^18.1.2
         version: 18.1.2(@types/node@22.13.10)(typescript@5.8.2)
@@ -935,8 +935,8 @@ packages:
     engines: {node: '>=6.0'}
     hasBin: true
 
-  eslint-config-vuetify@3.0.2:
-    resolution: {integrity: sha512-jhTC94JcKA69gzoVdpohnBYzUiSaUjSPwGxO3/o7/ZwAQrSLgML/UcUI3+LqP+huccOIbDMqfDeFSjaEioH+Qw==}
+  eslint-config-vuetify@3.0.3:
+    resolution: {integrity: sha512-YxNblNd0moJ7hA7KqwgXiKg3vpicGCpEAlyRNGaJpMubUYnbSZZw649fnjmyDKWmsKJRn0LPdTzF916UDCX0eA==}
     peerDependencies:
       eslint: ^9.23.0
 
@@ -2816,7 +2816,7 @@ snapshots:
     optionalDependencies:
       source-map: 0.6.1
 
-  eslint-config-vuetify@3.0.2(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)(vue-eslint-parser@10.1.2(eslint@9.23.0(jiti@2.4.2))):
+  eslint-config-vuetify@3.0.3(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)(vue-eslint-parser@10.1.2(eslint@9.23.0(jiti@2.4.2))):
     dependencies:
       '@eslint/js': 9.23.0
       '@stylistic/eslint-plugin': 4.2.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
