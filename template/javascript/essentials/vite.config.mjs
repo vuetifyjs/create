@@ -39,6 +39,9 @@ export default defineConfig({
       imports: [
         'vue',
         'vue-router',
+        {
+          'pinia': ['defineStore', 'useStore', 'storeToRefs'],
+        },
       ],
       eslintrc: {
         enabled: true,

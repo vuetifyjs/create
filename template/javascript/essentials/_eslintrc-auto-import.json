@@ -73,6 +73,9 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "defineStore": true,
+    "storeToRefs": true,
+    "useStore": true
   }
 }

@@ -23,6 +23,7 @@ export default defineConfig({
         'vue',
         {
           'vue-router/auto': ['useRoute', 'useRouter'],
+          'pinia': ['defineStore', 'useStore', 'storeToRefs'],
         },
       ],
       dts: 'src/auto-imports.d.ts',
