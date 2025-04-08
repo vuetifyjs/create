@@ -108,7 +108,7 @@ async function run () {
 
     if (usePackageManager && installDeps) {
       console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
-      installDependencies(projectRoot, usePackageManager)
+      await installDependencies(projectRoot, usePackageManager)
     }
   }
 
