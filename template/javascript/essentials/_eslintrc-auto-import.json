@@ -22,6 +22,7 @@
     "customRef": true,
     "defineAsyncComponent": true,
     "defineComponent": true,
+    "defineStore": true,
     "effectScope": true,
     "getCurrentInstance": true,
     "getCurrentScope": true,
@@ -35,6 +36,8 @@
     "nextTick": true,
     "onActivated": true,
     "onBeforeMount": true,
+    "onBeforeRouteLeave": true,
+    "onBeforeRouteUpdate": true,
     "onBeforeUnmount": true,
     "onBeforeUpdate": true,
     "onDeactivated": true,
@@ -55,6 +58,7 @@
     "shallowReactive": true,
     "shallowReadonly": true,
     "shallowRef": true,
+    "storeToRefs": true,
     "toRaw": true,
     "toRef": true,
     "toRefs": true,
@@ -73,9 +77,6 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "defineStore": true,
-    "storeToRefs": true,
-    "useStore": true
+    "watchSyncEffect": true
   }
 }
