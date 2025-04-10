@@ -1,4 +1,19 @@
+# Changelog
 
+# [2.4.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.3.1...v2.4.0) (2025-04-10)
+
+
+### Bug Fixes
+
+* await deps installation ([799128d](https://github.com/vuetifyjs/create-vuetify/commit/799128d2812ab1ba12d9a25761e238c0b85d5ecb))
+* exit cli if directory is not overwritten ([80574d7](https://github.com/vuetifyjs/create-vuetify/commit/80574d77c79fb7575383288607a3d7aa8f06b8db))
+* **HelloWorld:** modernize & cleanup HelloWorld ([#67](https://github.com/vuetifyjs/create-vuetify/issues/67)) ([0fd9089](https://github.com/vuetifyjs/create-vuetify/commit/0fd9089ec3bc25198f73d67a3d74bac7c7d3a4c3))
+* provide logos in nuxt template ([622cba3](https://github.com/vuetifyjs/create-vuetify/commit/622cba309ad91487ae7b8055e8f4c1f08a580c0a))
+
+
+### Features
+
+* add pinia functions to auto-import config ([d7ff19a](https://github.com/vuetifyjs/create-vuetify/commit/d7ff19aeb0c9eda689d3c0613da68be38c9ab3e2))
 
 # [2.3.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.2.6...v2.3.0) (2024-11-16)
 
