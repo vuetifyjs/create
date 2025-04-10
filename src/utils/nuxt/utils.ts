@@ -11,7 +11,7 @@ import type { AgentCommands, DetectResult } from 'package-manager-detector'
 // Utils
 import { resolveCommand } from 'package-manager-detector/commands'
 
-export function detectPkgInfo() {
+export function detectPkgInfo () {
   const userAgent = process.env.npm_config_user_agent
   if (!userAgent)
     return undefined
@@ -23,11 +23,11 @@ export function detectPkgInfo() {
   }
 }
 
-export function addPackageObject(
-    key: 'scripts' | 'dependencies' | 'devDependencies' | 'overrides' | 'resolutions',
-    entry: PackageJsonEntry[],
-    pkg: any,
-    sort = true,
+export function addPackageObject (
+  key: 'scripts' | 'dependencies' | 'devDependencies' | 'overrides' | 'resolutions',
+  entry: PackageJsonEntry[],
+  pkg: any,
+  sort = true,
 ) {
   pkg[key] ??= {}
   if (!sort) {
@@ -47,7 +47,7 @@ export function addPackageObject(
   })
 }
 
-export function runCommand(
+export function runCommand (
   pmDetection: DetectResult | null,
   command: keyof AgentCommands,
   args: string[],
@@ -76,12 +76,12 @@ export function runCommand(
   }
 }
 
-export function editFile(file: string, callback: (content: string) => string, destination?: string) {
+export function editFile (file: string, callback: (content: string) => string, destination?: string) {
   const content = fs.readFileSync(file, 'utf-8')
   fs.writeFileSync(destination ?? file, callback(content), 'utf-8')
 }
 
-export function getPaths(
+export function getPaths (
   rootPath: string,
   templateDir: string,
   v4: boolean,

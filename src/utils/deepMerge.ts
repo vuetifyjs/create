@@ -13,7 +13,7 @@ const isObject: { (key: any): boolean } = (v: unknown): boolean => {
 
 const deepMerge: DeepMerge = <T extends GenericObject[]>(...sources: T): GenericObject =>
   sources.reduce((acc, curr) => {
-    Object.keys(curr).forEach((key) => {
+    Object.keys(curr).forEach(key => {
       if (Array.isArray(acc[key]) && Array.isArray(curr[key])) {
         acc[key] = Array.from(new Set((acc[key]).concat(curr[key])))
       } else if (isObject(acc[key]) && isObject(curr[key])) {

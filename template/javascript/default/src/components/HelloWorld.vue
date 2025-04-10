@@ -27,7 +27,9 @@
             </template>
 
             <template #title>
-              <h2 class="text-h5 font-weight-bold">Get started</h2>
+              <h2 class="text-h5 font-weight-bold">
+                Get started
+              </h2>
             </template>
 
             <template #subtitle>
@@ -40,16 +42,16 @@
 
         <v-col v-for="link in links" :key="link.href" cols="6">
           <v-card
-            :href="link.href"
-            :prepend-icon="link.icon"
-            :subtitle="link.subtitle"
-            :title="link.title"
             append-icon="mdi-open-in-new"
             class="py-4"
             color="surface-variant"
+            :href="link.href"
+            :prepend-icon="link.icon"
             rel="noopener noreferrer"
             rounded="lg"
+            :subtitle="link.subtitle"
             target="_blank"
+            :title="link.title"
             variant="tonal"
           />
         </v-col>

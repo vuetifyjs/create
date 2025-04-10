@@ -1,6 +1,6 @@
 import { createVuetify } from 'vuetify'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(nuxtApp => {
   const vuetify = createVuetify({
     // WARNING: when switching ssr option in nuxt.config.ts file you need to manually change it here
     ssr: true,

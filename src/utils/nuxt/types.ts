@@ -12,4 +12,3 @@ export interface NuxtContext {
 }
 
 export type PackageJsonEntry = [name: string, value: string]
-

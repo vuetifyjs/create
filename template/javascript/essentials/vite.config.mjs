@@ -2,9 +2,10 @@
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import Fonts from 'unplugin-fonts/vite'
-import Layouts from 'vite-plugin-vue-layouts'
+import Layouts from 'vite-plugin-vue-layouts-next'
 import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
+import { VueRouterAutoImports } from 'unplugin-vue-router'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // Utilities
@@ -17,7 +18,7 @@ export default defineConfig({
     VueRouter(),
     Layouts(),
     Vue({
-      template: { transformAssetUrls }
+      template: { transformAssetUrls },
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
@@ -38,7 +39,10 @@ export default defineConfig({
     AutoImport({
       imports: [
         'vue',
-        'vue-router',
+        VueRouterAutoImports,
+        {
+          'pinia': ['defineStore', 'storeToRefs'],
+        },
       ],
       eslintrc: {
         enabled: true,
@@ -46,10 +50,19 @@ export default defineConfig({
       vueTemplate: true,
     }),
   ],
+  optimizeDeps: {
+    exclude: [
+      'vuetify',
+      'vue-router',
+      'unplugin-vue-router/runtime',
+      'unplugin-vue-router/data-loaders',
+      'unplugin-vue-router/data-loaders/basic',
+    ],
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
     extensions: [
       '.js',
@@ -67,6 +80,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       sass: {
+        api: 'modern-compiler',
+      },
+      scss: {
         api: 'modern-compiler',
       },
     },

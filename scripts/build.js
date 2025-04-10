@@ -17,7 +17,7 @@ async function bundle () {
 }
 
 bundle()
-  .catch((err) => {
+  .catch(err => {
     console.error(err)
     process.exit(1)
   })

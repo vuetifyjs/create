@@ -1,5 +1,5 @@
 // Node
-import { resolve, join } from 'path'
+import { join, resolve } from 'path'
 import { existsSync, readdirSync } from 'fs'
 
 // Types
@@ -9,6 +9,7 @@ import type { Options as PromptOptions } from 'prompts'
 import { presets } from './presets'
 import { red } from 'kolorist'
 import prompts from 'prompts'
+import { packageManager as defaultPackageManager } from './installDependencies'
 import validate from 'validate-npm-package-name'
 
 type ContextState = {
@@ -39,7 +40,7 @@ type DefinedContextState = { [P in keyof ContextState]-?: ContextState[P] }
 const initPrompts = async (context: ContextState) => {
 
   let answers: prompts.Answers<
-      'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtV4Compat' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
+    'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtV4Compat' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
   >
 
   if (context.usePreset) {
@@ -55,10 +56,16 @@ const initPrompts = async (context: ContextState) => {
       type: 'text',
       message: 'Project name:',
       initial: 'vuetify-project',
+      format: (v: string) => v.trim(),
       validate: (v: string) => {
-        const { errors } = validate(String(v).trim())
+        const { errors, warnings, validForNewPackages: isValid } = validate(String(v).trim())
 
-        return !(errors && errors.length) || `Package ${errors[0]}`
+        const error = isValid ? null : errors ? errors[0] : warnings![0]
+
+        if (!isValid) {
+          return `Package ${error}`
+        }
+        return true
       },
     },
     {
@@ -70,9 +77,15 @@ const initPrompts = async (context: ContextState) => {
         const projectPath = join(context.cwd, projectName)
 
         return (
-            !existsSync(projectPath) ||
-            readdirSync(projectPath).length === 0
+          !existsSync(projectPath) ||
+          readdirSync(projectPath).length === 0
         ) ? null : 'toggle'
+      },
+      onState (a) {
+        if (!a.value) {
+          console.error('\n\n', red('✖') + ' Target directory exists and is not empty.')
+          process.exit(1)
+        }
       },
       message: (prev: string) => `The project path: ${resolve(context.cwd, prev)} already exists, would you like to overwrite this directory?`,
     },
@@ -92,7 +105,7 @@ const initPrompts = async (context: ContextState) => {
     },
     {
       name: 'useTypeScript',
-      type: (usePreset) => {
+      type: usePreset => {
         const p = context.usePreset ?? usePreset
         return p.startsWith('nuxt-') || context.useTypeScript ? null : 'toggle'
       },
@@ -108,11 +121,11 @@ const initPrompts = async (context: ContextState) => {
         return p.startsWith('nuxt-') ? null : 'select'
       },
       message: 'Would you like to install dependencies with yarn, npm, pnpm, or bun?',
-      initial: 0,
+      initial: defaultPackageManager === 'bun' ? 3 : 0,
       choices: [
-        { title: 'yarn', value: 'yarn' },
-        { title: 'npm', value: 'npm' },
         { title: 'pnpm', value: 'pnpm' },
+        { title: 'npm', value: 'npm' },
+        { title: 'yarn', value: 'yarn' },
         { title: 'bun', value: 'bun' },
         { title: 'none', value: null },
       ],

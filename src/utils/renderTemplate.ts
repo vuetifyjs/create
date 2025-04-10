@@ -9,7 +9,7 @@ function mergePkg (source: string, destination: string) {
   const mergedPkg = deepMerge(target, src)
 
   const keysToSort = ['devDependencies', 'dependencies']
-  keysToSort.forEach((k) => {
+  keysToSort.forEach(k => {
     mergedPkg[k] = Object.keys(mergedPkg[k]).sort().reduce((a: { [key: string]: string }, c) => (a[c] = mergedPkg[k][c], a), {})
   })
 
@@ -18,7 +18,7 @@ function mergePkg (source: string, destination: string) {
 
 function renderDirectory (source: string, destination: string) {
   mkdirSync(destination, { recursive: true })
-  
+
   readdirSync(source)
     .forEach(path => renderTemplate(resolve(source, path), resolve(destination, path)))
 }

@@ -2,8 +2,10 @@ import { defineNuxtModule } from '@nuxt/kit'
 import type { Options as ModuleOptions } from '@vuetify/loader-shared'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import path from 'upath'
-import { resolveVuetifyBase, isObject } from '@vuetify/loader-shared'
+import { isObject, resolveVuetifyBase } from '@vuetify/loader-shared'
 import { pathToFileURL } from 'node:url'
+import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 
 export type { ModuleOptions }
 
@@ -14,7 +16,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'vuetify',
   },
   defaults: () => ({ styles: true }),
-  setup(options, nuxt) {
+  setup (options, nuxt) {
     let configFile: string | undefined
     const vuetifyBase = resolveVuetifyBase()
     const noneFiles = new Set<string>()
@@ -22,8 +24,9 @@ export default defineNuxtModule<ModuleOptions>({
     let sassVariables = false
     const PREFIX = 'vuetify-styles/'
     const SSR_PREFIX = `/@${PREFIX}`
+    const resolveCss = resolveCssFactory()
 
-    nuxt.hook('vite:extendConfig', (viteInlineConfig) => {
+    nuxt.hook('vite:extendConfig', viteInlineConfig => {
       // add vuetify transformAssetUrls
       viteInlineConfig.vue ??= {}
       viteInlineConfig.vue.template ??= {}
@@ -39,6 +42,8 @@ export default defineNuxtModule<ModuleOptions>({
       viteInlineConfig.css.preprocessorOptions ??= {}
       viteInlineConfig.css.preprocessorOptions.sass ??= {}
       viteInlineConfig.css.preprocessorOptions.sass.api = 'modern-compiler'
+      viteInlineConfig.css.preprocessorOptions.scss ??= {}
+      viteInlineConfig.css.preprocessorOptions.scss.api = 'modern-compiler'
 
       viteInlineConfig.plugins.push({
         name: 'vuetify:nuxt:styles',
@@ -59,7 +64,7 @@ export default defineNuxtModule<ModuleOptions>({
         },
         async resolveId (source, importer, { custom, ssr }) {
           if (source.startsWith(PREFIX) || source.startsWith(SSR_PREFIX)) {
-            if (source.endsWith('.sass')) {
+            if (source.match(/\.s[ca]ss$/)) {
               return source
             }
 
@@ -74,8 +79,7 @@ export default defineNuxtModule<ModuleOptions>({
             )
           ) {
             if (options.styles === 'sass') {
-              const target = source.replace(/\.css$/, '.sass')
-              return this.resolve(target, importer, { skipSelf: true, custom })
+              return this.resolve(await resolveCss(source), importer, { skipSelf: true, custom })
             }
 
             const resolution = await this.resolve(source, importer, { skipSelf: true, custom })
@@ -83,7 +87,7 @@ export default defineNuxtModule<ModuleOptions>({
             if (!resolution)
               return undefined
 
-            const target = resolution.id.replace(/\.css$/, '.sass')
+            const target = await resolveCss(resolution.id)
             if (isNone) {
               noneFiles.add(target)
               return target
@@ -94,7 +98,7 @@ export default defineNuxtModule<ModuleOptions>({
 
           return undefined
         },
-        load(id){
+        load (id){
           if (sassVariables) {
             const target = id.startsWith(PREFIX)
               ? path.resolve(vuetifyBase, id.slice(PREFIX.length))
@@ -103,8 +107,9 @@ export default defineNuxtModule<ModuleOptions>({
                 : undefined
 
             if (target) {
+              const suffix = target.match(/\.scss/) ? ';\n' : '\n'
               return {
-                code: `@use "${configFile}"\n@use "${pathToFileURL(target).href}"`,
+                code: `@use "${configFile}"${suffix}@use "${pathToFileURL(target).href}"${suffix}`,
                 map: {
                   mappings: '',
                 },
@@ -116,8 +121,28 @@ export default defineNuxtModule<ModuleOptions>({
         },
       })
     })
-  }
+  },
 })
+
+function resolveCssFactory () {
+  const mappings = new Map<string, string>()
+  return async (source: string) => {
+    let mapping = mappings.get(source)
+    if (!mapping) {
+      try {
+        mapping = source.replace(/\.css$/, '.sass')
+        await fsp.access(mapping, fs.constants.R_OK)
+      }
+      catch (err) {
+        if (!(err instanceof Error && 'code' in err && err.code === 'ENOENT'))
+          throw err
+        mapping = source.replace(/\.css$/, '.scss')
+      }
+      mappings.set(source, mapping)
+    }
+    return mapping
+  }
+}
 
 function isSubdir (root: string, test: string) {
   const relative = path.relative(root, test)

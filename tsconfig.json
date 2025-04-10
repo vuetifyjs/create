@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "useDefineForClassFields": true,
     "jsx": "preserve",
     "noImplicitThis": true,
     "strict": true,
     "isolatedModules": true,
-    // "importsNotUsedAsValues": "error",
     "target": "esnext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

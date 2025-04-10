@@ -26,13 +26,22 @@ export default defineConfig({
     Components(),
     ViteFonts({
       google: {
-        families: [ {
+        families: [{
           name: 'Roboto',
           styles: 'wght@100;300;400;500;700;900',
         }],
       },
     }),
   ],
+  optimizeDeps: {
+    exclude: [
+      'vuetify',
+      'vue-router',
+      'unplugin-vue-router/runtime',
+      'unplugin-vue-router/data-loaders',
+      'unplugin-vue-router/data-loaders/basic',
+    ],
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {
@@ -54,6 +63,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       sass: {
+        api: 'modern-compiler',
+      },
+      scss: {
         api: 'modern-compiler',
       },
     },

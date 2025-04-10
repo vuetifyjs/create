@@ -1,25 +1,27 @@
-import { spawnSync } from 'child_process'
+import { installDependencies as installDependencies$1 } from 'nypm'
+import { pnpmIgnored } from './cli/pnpmIgnored'
 
-function installDependencies(projectRoot: string, packageManager: 'npm' | 'yarn' | 'pnpm' | 'bun') {
-  const cmd = (
-    packageManager === 'npm' ?
-      'npm install' :
-      packageManager === 'yarn' ?
-        'yarn' : 
-      packageManager === 'bun' ?
-        'bun install' :
-        'pnpm install'
-  )
-  
-  const spawn = spawnSync(cmd, {
-    cwd: projectRoot,
-    stdio: ['inherit', 'inherit', 'pipe'],
-    shell: true,
+const userAgent = process.env.npm_config_user_agent ?? ''
+
+export const packageManager = /bun/.test(userAgent)
+  ? 'bun'
+  : 'pnpm'
+
+export async function installDependencies (root: string = process.cwd(), manager: 'npm' | 'pnpm' | 'yarn' | 'bun' = packageManager) {
+  await installDependencies$1({
+    packageManager: manager,
+    cwd: root,
+    silent: true,
   })
-
-  if (spawn.error) {
-    throw spawn.error
-  }
+    .catch(() => {
+      console.error(
+        `Failed to install dependencies using ${manager}.`
+      )
+    })
+    .then(() => {
+      if (manager === 'pnpm') {
+        const detect = pnpmIgnored(root)
+        if (detect) console.warn(detect)
+      }
+    })
 }
-
-export { installDependencies }

@@ -26,6 +26,9 @@ export default defineConfig({
       },
     }),
   ],
+  optimizeDeps: {
+    exclude: ['vuetify'],
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {
@@ -47,6 +50,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       sass: {
+        api: 'modern-compiler',
+      },
+      scss: {
         api: 'modern-compiler',
       },
     },
