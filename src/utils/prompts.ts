@@ -81,6 +81,12 @@ const initPrompts = async (context: ContextState) => {
           readdirSync(projectPath).length === 0
         ) ? null : 'toggle'
       },
+      onState (a) {
+        if (!a.value) {
+          console.error('\n\n', red('✖') + ' Target directory exists and is not empty.')
+          process.exit(1)
+        }
+      },
       message: (prev: string) => `The project path: ${resolve(context.cwd, prev)} already exists, would you like to overwrite this directory?`,
     },
     {
