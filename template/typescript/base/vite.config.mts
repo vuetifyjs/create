@@ -2,7 +2,7 @@
 import Components from 'unplugin-vue-components/vite'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import ViteFonts from 'unplugin-fonts/vite'
+import Fonts from 'unplugin-fonts/vite'
 import VueRouter from 'unplugin-vue-router/vite'
 
 // Utilities
@@ -24,12 +24,15 @@ export default defineConfig({
       },
     }),
     Components(),
-    ViteFonts({
-      google: {
-        families: [{
-          name: 'Roboto',
-          styles: 'wght@100;300;400;500;700;900',
-        }],
+    Fonts({
+      fontsource: {
+        families: [
+          {
+            name: "Roboto",
+            weights: [100, 300, 400, 500, 700, 900],
+            styles: ["normal", "italic"],
+          },
+        ],
       },
     }),
   ],
