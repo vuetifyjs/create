@@ -9,3 +9,8 @@ export function pnpmIgnored (root: string) {
     return detect
   }
 }
+
+export default function pnpm (root: string) {
+  const detect = pnpmIgnored(root)
+  if (detect) console.warn(detect)
+}

@@ -1,5 +1,6 @@
 import { installDependencies as installDependencies$1 } from 'nypm'
-import { pnpmIgnored } from './cli/pnpmIgnored'
+import { pnpm } from './cli/postinstall'
+import { yarn } from './cli/preinstall'
 
 const userAgent = process.env.npm_config_user_agent ?? ''
 
@@ -8,6 +9,9 @@ export const packageManager = /bun/.test(userAgent)
   : 'pnpm'
 
 export async function installDependencies (root: string = process.cwd(), manager: 'npm' | 'pnpm' | 'yarn' | 'bun' = packageManager) {
+  if (manager === 'yarn') {
+    yarn(root)
+  }
   await installDependencies$1({
     packageManager: manager,
     cwd: root,
@@ -20,8 +24,7 @@ export async function installDependencies (root: string = process.cwd(), manager
     })
     .then(() => {
       if (manager === 'pnpm') {
-        const detect = pnpmIgnored(root)
-        if (detect) console.warn(detect)
+        pnpm(root)
       }
     })
 }
