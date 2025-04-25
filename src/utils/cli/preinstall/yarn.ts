@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process'
+import { x } from 'tinyexec'
 import { appendFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
@@ -9,14 +9,14 @@ packageExtensions:
       "@vue/compiler-sfc": "*"
 `
 
-export function yarnFile (root: string) {
-  const pnpmVersion = execSync(`cd ${root} && yarn -v`, { encoding: 'utf8' }).trim()
+export async function yarnFile (root: string) {
+  const pnpmVersion = (await (x('yarn', ['-v'], { nodeOptions: { cwd: root } }))).stdout.trim()
   const [major] = pnpmVersion.split('.').map(Number)
   if (major && major >= 2) {
     appendFileSync(resolve(root, '.yarnrc.yml'), templateToAppend)
   }
 }
 
-export default function yarn (root: string) {
+export default async function yarn (root: string) {
   yarnFile(root)
 }

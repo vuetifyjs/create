@@ -1,16 +1,16 @@
-import { execSync } from 'node:child_process'
+import { x } from 'tinyexec'
 
-export function pnpmIgnored (root: string) {
-  const pnpmVersion = execSync(`cd ${root} && pnpm -v`, { encoding: 'utf8' }).trim()
+export async function pnpmIgnored (root: string) {
+  const pnpmVersion = (await x(`pnpm`, ['-v'], { nodeOptions: { cwd: root } })).stdout.trim()
   const [major] = pnpmVersion.split('.').map(Number)
   if (major && major >= 10) {
-    const detect = execSync(`cd ${root} && pnpm ignored-builds`, { encoding: 'utf8' })
+    const detect = (await x('pnpm', ['ignored-builds'], { nodeOptions: { cwd: root } })).stdout
     if (detect.startsWith('Automatically ignored builds during installation:\n  None')) return
     return detect
   }
 }
 
-export default function pnpm (root: string) {
-  const detect = pnpmIgnored(root)
+export default async function pnpm (root: string) {
+  const detect = await pnpmIgnored(root)
   if (detect) console.warn(detect)
 }

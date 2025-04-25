@@ -10,7 +10,7 @@ export const packageManager = /bun/.test(userAgent)
 
 export async function installDependencies (root: string = process.cwd(), manager: 'npm' | 'pnpm' | 'yarn' | 'bun' = packageManager) {
   if (manager === 'yarn') {
-    yarn(root)
+    await yarn(root)
   }
   await installDependencies$1({
     packageManager: manager,
@@ -22,9 +22,7 @@ export async function installDependencies (root: string = process.cwd(), manager
         `Failed to install dependencies using ${manager}.`
       )
     })
-    .then(() => {
-      if (manager === 'pnpm') {
-        pnpm(root)
-      }
-    })
+  if (manager === 'pnpm') {
+    await pnpm(root)
+  }
 }
