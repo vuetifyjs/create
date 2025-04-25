@@ -24,7 +24,7 @@ export default defineConfig({
         'vue',
         VueRouterAutoImports,
         {
-          'pinia': ['defineStore', 'storeToRefs'],
+          pinia: ['defineStore', 'storeToRefs'],
         },
       ],
       dts: 'src/auto-imports.d.ts',
@@ -70,7 +70,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('src', import.meta.url)),
     },
     extensions: [
       '.js',

@@ -15,13 +15,15 @@ export async function installDependencies (root: string = process.cwd(), manager
   })
     .catch(() => {
       console.error(
-        `Failed to install dependencies using ${manager}.`
+        `Failed to install dependencies using ${manager}.`,
       )
     })
     .then(() => {
       if (manager === 'pnpm') {
         const detect = pnpmIgnored(root)
-        if (detect) console.warn(detect)
+        if (detect) {
+          console.warn(detect)
+        }
       }
     })
 }

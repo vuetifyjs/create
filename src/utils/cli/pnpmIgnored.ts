@@ -5,7 +5,9 @@ export function pnpmIgnored (root: string) {
   const [major] = pnpmVersion.split('.').map(Number)
   if (major && major >= 10) {
     const detect = execSync(`cd ${root} && pnpm ignored-builds`, { encoding: 'utf8' })
-    if (detect.startsWith('Automatically ignored builds during installation:\n  None')) return
+    if (detect.startsWith('Automatically ignored builds during installation:\n  None')) {
+      return
+    }
     return detect
   }
 }

@@ -35,7 +35,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('src', import.meta.url)),
     },
     extensions: [
       '.js',
@@ -56,7 +56,7 @@ export default defineConfig({
         api: 'modern-compiler',
       },
       scss: {
-        api:'modern-compiler',
+        api: 'modern-compiler',
       },
     },
   },

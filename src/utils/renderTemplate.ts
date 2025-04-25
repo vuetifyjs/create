@@ -1,5 +1,5 @@
-import { copyFileSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'fs'
-import { basename, dirname, resolve } from 'path'
+import { copyFileSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { basename, dirname, resolve } from 'node:path'
 
 import { deepMerge } from './deepMerge'
 
@@ -9,9 +9,9 @@ function mergePkg (source: string, destination: string) {
   const mergedPkg = deepMerge(target, src)
 
   const keysToSort = ['devDependencies', 'dependencies']
-  keysToSort.forEach(k => {
+  for (const k of keysToSort) {
     mergedPkg[k] = Object.keys(mergedPkg[k]).sort().reduce((a: { [key: string]: string }, c) => (a[c] = mergedPkg[k][c], a), {})
-  })
+  }
 
   writeFileSync(destination, JSON.stringify(mergedPkg, null, 2) + '\n')
 }
@@ -19,16 +19,22 @@ function mergePkg (source: string, destination: string) {
 function renderDirectory (source: string, destination: string) {
   mkdirSync(destination, { recursive: true })
 
-  readdirSync(source)
-    .forEach(path => renderTemplate(resolve(source, path), resolve(destination, path)))
+  for (const path of readdirSync(source)) {
+    renderTemplate(resolve(source, path), resolve(destination, path))
+  }
 }
 
 function renderFile (source: string, destination: string) {
   const filename = basename(source)
 
-  if (filename.startsWith('_')) destination = resolve(dirname(destination), filename.replace('_', '.'))
-  if (filename === 'package.json') mergePkg(source, destination)
-  else copyFileSync(source, destination)
+  if (filename.startsWith('_')) {
+    destination = resolve(dirname(destination), filename.replace('_', '.'))
+  }
+  if (filename === 'package.json') {
+    mergePkg(source, destination)
+  } else {
+    copyFileSync(source, destination)
+  }
 }
 
 function renderTemplate (source: string, destination: string) {
