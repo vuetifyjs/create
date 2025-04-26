@@ -18,5 +18,5 @@ export async function yarnFile (root: string) {
 }
 
 export default async function yarn (root: string) {
-  yarnFile(root)
+  await yarnFile(root)
 }
