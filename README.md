@@ -1,8 +1,15 @@
-# Vuetify Create
-
 <p align="center">
-  <img src="https://vuetifyjs.b-cdn.net/docs/images/one/create/vcreate-logo.png" alt="Vuetify Logo" width="200">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.vuetifyjs.com/docs/images/logos/vcreate-logo-dark.png">
+    <img alt="Vuetify One Logo" src="https://cdn.vuetifyjs.com/docs/images/logos/vcreate-logo-light.png" height="150">
+  </picture>
 </p>
+
+[![npm version](https://img.shields.io/npm/v/create-vuetify.svg)](https://www.npmjs.com/package/create-vuetify)
+[![npm downloads](https://img.shields.io/npm/dm/create-vuetify?color=blue)](https://npm.chart.dev/create-vuetify)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+Scaffold your next Vuetify application
 
 ## 💿 Getting Started
 
