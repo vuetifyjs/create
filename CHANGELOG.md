@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.5.1](https://github.com/vuetifyjs/create-vuetify/compare/v2.5.0...v2.5.1) (2025-04-27)
+
 # [2.5.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.4.0...v2.5.0) (2025-04-27)
 
 
