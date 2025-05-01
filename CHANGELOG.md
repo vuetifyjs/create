@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.5.1](https://github.com/vuetifyjs/create-vuetify/compare/v2.5.0...v2.5.1) (2025-04-27)
+
+# [2.5.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.4.0...v2.5.0) (2025-04-27)
+
+
+### Bug Fixes
+
+* add @vue/compiler-sfc as dependency for yarn 2+ ([#73](https://github.com/vuetifyjs/create-vuetify/issues/73)) ([64dc19a](https://github.com/vuetifyjs/create-vuetify/commit/64dc19a10a6a9e3a4736f03dc4bc91bd68b968c7))
+
+
+### Features
+
+* use fontsource for roboto font ([#69](https://github.com/vuetifyjs/create-vuetify/issues/69)) ([a07c735](https://github.com/vuetifyjs/create-vuetify/commit/a07c7357a3b61c19f20aea90696f7e4dbe93e576))
+
 # [2.4.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.3.1...v2.4.0) (2025-04-10)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "create-vuetify",
-  "version": "2.4.0",
+  "version": "2.5.1",
   "author": "Elijah Kotyluk <elijah@elijahkotyluk.com>",
   "license": "MIT",
   "type": "module",
@@ -30,8 +30,9 @@
     "kolorist": "^1.8.0",
     "magicast": "^0.3.5",
     "minimist": "^1.2.8",
-    "package-manager-detector": "^1.0.0",
+    "package-manager-detector": "^1.2.0",
     "prompts": "^2.4.2",
+    "tinyexec": "^1.0.1",
     "validate-npm-package-name": "^6.0.0"
   },
   "devDependencies": {
