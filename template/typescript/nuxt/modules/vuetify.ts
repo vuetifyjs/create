@@ -7,8 +7,6 @@ import { pathToFileURL } from 'node:url'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 
-export type { ModuleOptions }
-
 // WARNING: Remove the file from modules directory if you install vuetify-nuxt-module
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -51,31 +49,26 @@ export default defineNuxtModule<ModuleOptions>({
         async configResolved (config) {
           if (isObject(options.styles)) {
             sassVariables = true
-            if (path.isAbsolute(options.styles.configFile)) {
-              configFile = path.resolve(options.styles.configFile)
-            } else {
-              configFile = path.resolve(path.join(config.root || process.cwd(), options.styles.configFile))
-            }
+            configFile = path.isAbsolute(options.styles.configFile) ? path.resolve(options.styles.configFile) : path.resolve(path.join(config.root || process.cwd(), options.styles.configFile))
             configFile = pathToFileURL(configFile).href
-          }
-          else {
+          } else {
             isNone = options.styles === 'none'
           }
         },
         async resolveId (source, importer, { custom, ssr }) {
           if (source.startsWith(PREFIX) || source.startsWith(SSR_PREFIX)) {
-            if (source.match(/\.s[ca]ss$/)) {
+            if (/\.s[ca]ss$/.test(source)) {
               return source
             }
 
             const idx = source.indexOf('?')
-            return idx > -1 ? source.slice(0, idx) : source
+            return idx === -1 ? source : source.slice(0, idx)
           }
           if (
             source === 'vuetify/styles' || (
-              importer &&
-              source.endsWith('.css') &&
-              isSubdir(vuetifyBase, path.isAbsolute(source) ? source : importer)
+              importer
+              && source.endsWith('.css')
+              && isSubdir(vuetifyBase, path.isAbsolute(source) ? source : importer)
             )
           ) {
             if (options.styles === 'sass') {
@@ -84,8 +77,9 @@ export default defineNuxtModule<ModuleOptions>({
 
             const resolution = await this.resolve(source, importer, { skipSelf: true, custom })
 
-            if (!resolution)
+            if (!resolution) {
               return undefined
+            }
 
             const target = await resolveCss(resolution.id)
             if (isNone) {
@@ -93,21 +87,21 @@ export default defineNuxtModule<ModuleOptions>({
               return target
             }
 
-            return `${ssr ? SSR_PREFIX: PREFIX}${path.relative(vuetifyBase, target)}`
+            return `${ssr ? SSR_PREFIX : PREFIX}${path.relative(vuetifyBase, target)}`
           }
 
           return undefined
         },
-        load (id){
+        load (id) {
           if (sassVariables) {
             const target = id.startsWith(PREFIX)
               ? path.resolve(vuetifyBase, id.slice(PREFIX.length))
-              : id.startsWith(SSR_PREFIX)
-                ? path.resolve(vuetifyBase, id.slice(SSR_PREFIX.length))
-                : undefined
+              : (id.startsWith(SSR_PREFIX)
+                  ? path.resolve(vuetifyBase, id.slice(SSR_PREFIX.length))
+                  : undefined)
 
             if (target) {
-              const suffix = target.match(/\.scss/) ? ';\n' : '\n'
+              const suffix = /\.scss/.test(target) ? ';\n' : '\n'
               return {
                 code: `@use "${configFile}"${suffix}@use "${pathToFileURL(target).href}"${suffix}`,
                 map: {
@@ -132,10 +126,10 @@ function resolveCssFactory () {
       try {
         mapping = source.replace(/\.css$/, '.sass')
         await fsp.access(mapping, fs.constants.R_OK)
-      }
-      catch (err) {
-        if (!(err instanceof Error && 'code' in err && err.code === 'ENOENT'))
-          throw err
+      } catch (error) {
+        if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) {
+          throw error
+        }
         mapping = source.replace(/\.css$/, '.scss')
       }
       mappings.set(source, mapping)
@@ -148,3 +142,5 @@ function isSubdir (root: string, test: string) {
   const relative = path.relative(root, test)
   return relative && !relative.startsWith('..') && !path.isAbsolute(relative)
 }
+
+export { type Options as ModuleOptions } from '@vuetify/loader-shared'

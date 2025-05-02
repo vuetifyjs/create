@@ -1,7 +1,7 @@
 // Node
-import { dirname, join, resolve } from 'path'
-import { fileURLToPath } from 'url'
-import { mkdirSync, rmSync, writeFileSync } from 'fs'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 
 // Types
 import type { ContextState } from './utils/prompts'
@@ -19,7 +19,7 @@ const validPresets = ['base', 'custom', 'default', 'essentials']
 async function run () {
   const argv = minimist(process.argv.slice(2), {
     alias: {
-      'typescript': ['ts'],
+      typescript: ['ts'],
     },
   })
 
@@ -50,8 +50,6 @@ async function run () {
     usePackageManager,
     installDependencies: installDeps,
     usePreset,
-    useStore,
-    useEslint,
     useNuxtV4Compat,
     useNuxtModule,
     useNuxtSSR,
@@ -83,8 +81,7 @@ async function run () {
       useNuxtSSR,
       useNuxtSSRClientHints,
     })
-  }
-  else {
+  } else {
     // Create project directory
     mkdirSync(projectRoot)
 
@@ -122,7 +119,7 @@ run()
     console.log('Support Vuetify: https://github.com/sponsors/johnleider')
     process.exit(0)
   })
-  .catch(err => {
-    console.error(`\n${red('✖')} ${err}\n`)
+  .catch(error => {
+    console.error(`\n${red('✖')} ${error}\n`)
     process.exit(1)
   })

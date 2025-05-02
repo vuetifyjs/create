@@ -1,1 +1,12 @@
-export { default } from 'eslint-config-vuetify/index.ts.mjs'
+import vuetify from 'eslint-config-vuetify'
+
+export default vuetify({
+  vue: true,
+  perfectionist: {
+    import: false,
+  },
+}, {
+  rules: {
+    'unicorn/no-process-exit': 'off',
+  },
+})

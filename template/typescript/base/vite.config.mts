@@ -32,9 +32,9 @@ export default defineConfig({
       fontsource: {
         families: [
           {
-            name: "Roboto",
+            name: 'Roboto',
             weights: [100, 300, 400, 500, 700, 900],
-            styles: ["normal", "italic"],
+            styles: ['normal', 'italic'],
           },
         ],
       },
@@ -52,7 +52,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('src', import.meta.url)),
     },
     extensions: [
       '.js',

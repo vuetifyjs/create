@@ -1,7 +1,7 @@
 // Node
-import fs from 'fs'
-import path from 'path'
-import { spawnSync } from 'child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+import { spawnSync } from 'node:child_process'
 
 // Types
 import type { NuxtContext, PackageJsonEntry } from './types'
@@ -35,14 +35,17 @@ export async function renderNuxtTemplate (ctx: NuxtContext) {
     .replace('@latest', () => (isYarn1 ? '' : '@latest'))
     .replace(/^npm exec/, () => {
       // Prefer `pnpm dlx`, `yarn dlx`, or `bun x`
-      if (pkgManager === 'pnpm')
+      if (pkgManager === 'pnpm') {
         return 'pnpm dlx'
+      }
 
-      if (pkgManager === 'yarn' && !isYarn1)
+      if (pkgManager === 'yarn' && !isYarn1) {
         return 'yarn dlx'
+      }
 
-      if (pkgManager === 'bun')
+      if (pkgManager === 'bun') {
         return 'bun x'
+      }
 
       // Use `npm exec` in all other cases,
       // including Yarn 1.x and other custom npm clients.
@@ -87,7 +90,7 @@ function configurePackageJson ({
   nuxtPreset,
 }: NuxtContext) {
   const packageJson = path.join(projectRoot, 'package.json')
-  const pkg = JSON.parse(fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf-8'))
+  const pkg = JSON.parse(fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf8'))
   pkg.name = projectName
 
   // prepare scripts
@@ -104,7 +107,7 @@ function configurePackageJson ({
   const dependencies: PackageJsonEntry[] = [
     ['vuetify', versions.vuetify],
   ]
-  if (dependencies.length) {
+  if (dependencies.length > 0) {
     addPackageObject('dependencies', dependencies, pkg)
   }
 
@@ -118,13 +121,12 @@ function configurePackageJson ({
   ]
   if (useNuxtModule) {
     devDependencies.push(['vuetify-nuxt-module', versions['vuetify-nuxt-module']])
-  }
-  else {
+  } else {
     devDependencies.push(['upath', versions['upath']])
     devDependencies.push(['@vuetify/loader-shared', versions['@vuetify/loader-shared']])
     devDependencies.push(['vite-plugin-vuetify', versions['vite-plugin-vuetify']])
   }
-  if (devDependencies.length) {
+  if (devDependencies.length > 0) {
     addPackageObject('devDependencies', devDependencies, pkg)
   }
 
@@ -132,7 +134,7 @@ function configurePackageJson ({
   addPackageObject('scripts', scripts, pkg, false)
 
   // save package.json
-  fs.writeFileSync(packageJson, JSON.stringify(pkg, null, 2), 'utf-8')
+  fs.writeFileSync(packageJson, JSON.stringify(pkg, null, 2), 'utf8')
 }
 
 function configureVuetify (ctx: NuxtContext, nuxtConfig: ReturnType<typeof parseModule>) {
@@ -283,9 +285,11 @@ function prepareNuxtModule (
         useBrowserThemeOnly: false,
       },
     },
-    styles: ctx.nuxtPreset === 'nuxt-default' ? true : {
-      configFile: 'assets/settings.scss',
-    },
+    styles: ctx.nuxtPreset === 'nuxt-default'
+      ? true
+      : {
+          configFile: 'assets/settings.scss',
+        },
   }
   configureVuetify(ctx, nuxtConfig)
   addNuxtModule(
@@ -304,9 +308,11 @@ function prepareVuetifyModule (
   const config = configureVuetify(ctx, nuxtConfig)
 
   // enable auto import and include styles
-  const styles = ctx.nuxtPreset !== 'nuxt-essentials' ? true : {
-    configFile: 'assets/settings.scss',
-  }
+  const styles = ctx.nuxtPreset === 'nuxt-essentials'
+    ? {
+        configFile: 'assets/settings.scss',
+      }
+    : true
   config.vuetify = { autoImport: true, styles }
 }
 
@@ -323,13 +329,12 @@ function prepareProject (ctx: NuxtContext) {
   // v4 compat: rootPath is `${rootPath}/app`
   // https://nuxt.com/docs/getting-started/upgrade#migrating-to-nuxt-4
   const nuxtConfigFile = path.join(rootPath, useNuxtV4Compat ? '../nuxt.config.ts' : 'nuxt.config.ts')
-  const nuxtConfig = parseModule(fs.readFileSync(nuxtConfigFile, 'utf-8'))
+  const nuxtConfig = parseModule(fs.readFileSync(nuxtConfigFile, 'utf8'))
 
   // prepare nuxt config
   if (useNuxtModule) {
     prepareNuxtModule(ctx, nuxtConfig)
-  }
-  else {
+  } else {
     prepareVuetifyModule(ctx, nuxtConfig)
   }
 
@@ -368,7 +373,7 @@ function prepareProject (ctx: NuxtContext) {
   fs.writeFileSync(
     nuxtConfigFile,
     code,
-    'utf-8',
+    'utf8',
   )
 
   // prepare resources

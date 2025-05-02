@@ -5,15 +5,15 @@ interface DeepMerge {
 
 const isObject: { (key: any): boolean } = (v: unknown): boolean => {
   return (
-    v === Object(v) &&
-    v !== null &&
-    !Array.isArray(v)
+    v === Object(v)
+    && v !== null
+    && !Array.isArray(v)
   )
 }
 
 const deepMerge: DeepMerge = <T extends GenericObject[]>(...sources: T): GenericObject =>
   sources.reduce((acc, curr) => {
-    Object.keys(curr).forEach(key => {
+    for (const key of Object.keys(curr)) {
       if (Array.isArray(acc[key]) && Array.isArray(curr[key])) {
         acc[key] = Array.from(new Set((acc[key]).concat(curr[key])))
       } else if (isObject(acc[key]) && isObject(curr[key])) {
@@ -21,7 +21,7 @@ const deepMerge: DeepMerge = <T extends GenericObject[]>(...sources: T): Generic
       } else {
         acc[key] = curr[key]
       }
-    })
+    }
 
     return acc
   }, {})
