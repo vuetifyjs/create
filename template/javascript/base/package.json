@@ -4,7 +4,7 @@
   },
   "devDependencies": {
     "eslint": "^9.23.0",
-    "eslint-config-vuetify": "^3.0.3",
+    "eslint-config-vuetify": "^4.0.0",
     "globals": "^16.0.0",
     "vue-router": "^4.5.0",
     "unplugin-vue-router": "^0.12.0"

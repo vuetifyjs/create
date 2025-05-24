@@ -1,8 +1,8 @@
 // Node
-import process from 'process'
-import path from 'path'
-import { spawnSync } from 'child_process'
-import fs from 'fs'
+import process from 'node:process'
+import path from 'node:path'
+import { spawnSync } from 'node:child_process'
+import fs from 'node:fs'
 
 // Types
 import type { PackageJsonEntry } from './types'
@@ -13,8 +13,9 @@ import { resolveCommand } from 'package-manager-detector/commands'
 
 export function detectPkgInfo () {
   const userAgent = process.env.npm_config_user_agent
-  if (!userAgent)
+  if (!userAgent) {
     return undefined
+  }
   const pkgSpec = userAgent.split(' ')[0]
   const pkgSpecArr = pkgSpec.split('/')
   return {
@@ -31,20 +32,21 @@ export function addPackageObject (
 ) {
   pkg[key] ??= {}
   if (!sort) {
-    for (const [name, value] of entry)
+    for (const [name, value] of entry) {
       pkg[key][name] = value
+    }
 
     return
   }
 
   const entries = Object.entries(pkg[key])
   pkg[key] = {}
-  entry.forEach(([name, value]) => {
+  for (const [name, value] of entry) {
     entries.push([name, value])
-  })
-  entries.sort(([a], [b]) => a.localeCompare(b)).forEach(([k, v]) => {
+  }
+  for (const [k, v] of entries.sort(([a], [b]) => a.localeCompare(b))) {
     pkg[key][k] = v
-  })
+  }
 }
 
 export function runCommand (
@@ -77,8 +79,8 @@ export function runCommand (
 }
 
 export function editFile (file: string, callback: (content: string) => string, destination?: string) {
-  const content = fs.readFileSync(file, 'utf-8')
-  fs.writeFileSync(destination ?? file, callback(content), 'utf-8')
+  const content = fs.readFileSync(file, 'utf8')
+  fs.writeFileSync(destination ?? file, callback(content), 'utf8')
 }
 
 export function getPaths (
