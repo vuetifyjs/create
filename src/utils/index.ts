@@ -1,7 +1,3 @@
-import { installDependencies } from './installDependencies'
-import { renderTemplate } from './renderTemplate'
+export { installDependencies } from './installDependencies'
 
-export {
-  installDependencies,
-  renderTemplate,
-}
+export { renderTemplate } from './renderTemplate'

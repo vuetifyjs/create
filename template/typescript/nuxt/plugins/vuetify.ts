@@ -10,5 +10,5 @@ export default defineNuxtPlugin(nuxtApp => {
     },
   })
 
-  nuxtApp.vueApp.use(vuetify);
+  nuxtApp.vueApp.use(vuetify)
 })

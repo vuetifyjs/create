@@ -1,6 +1,6 @@
 // Node
-import { join, resolve } from 'path'
-import { existsSync, readdirSync } from 'fs'
+import { join, resolve } from 'node:path'
+import { existsSync, readdirSync } from 'node:fs'
 
 // Types
 import type { Options as PromptOptions } from 'prompts'
@@ -13,15 +13,15 @@ import { packageManager as defaultPackageManager } from './installDependencies'
 import validate from 'validate-npm-package-name'
 
 type ContextState = {
-  cwd: string,
-  projectName?: string,
-  canOverwrite?: boolean,
-  useTypeScript?: boolean,
-  usePackageManager?: 'npm' | 'pnpm' | 'yarn' | 'bun',
-  installDependencies?: boolean,
+  cwd: string
+  projectName?: string
+  canOverwrite?: boolean
+  useTypeScript?: boolean
+  usePackageManager?: 'npm' | 'pnpm' | 'yarn' | 'bun'
+  installDependencies?: boolean
   usePreset?: 'base' | 'default' | 'essentials' | 'nuxt-base' | 'nuxt-default' | 'nuxt-essentials'
-  useEslint?: boolean,
-  useRouter?: boolean,
+  useEslint?: boolean
+  useRouter?: boolean
   useStore?: boolean
   useNuxtV4Compat?: boolean
   useNuxtModule?: boolean
@@ -38,8 +38,7 @@ const promptOptions: PromptOptions = {
 type DefinedContextState = { [P in keyof ContextState]-?: ContextState[P] }
 
 const initPrompts = async (context: ContextState) => {
-
-  let answers: prompts.Answers<
+  type Answers = prompts.Answers<
     'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtV4Compat' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
   >
 
@@ -50,7 +49,7 @@ const initPrompts = async (context: ContextState) => {
     }
   }
 
-  answers = await prompts([
+  const answers: Answers = await prompts([
     {
       name: 'projectName',
       type: 'text',
@@ -60,7 +59,7 @@ const initPrompts = async (context: ContextState) => {
       validate: (v: string) => {
         const { errors, warnings, validForNewPackages: isValid } = validate(String(v).trim())
 
-        const error = isValid ? null : errors ? errors[0] : warnings![0]
+        const error = isValid ? null : (errors ? errors[0] : warnings![0])
 
         if (!isValid) {
           return `Package ${error}`
@@ -77,9 +76,11 @@ const initPrompts = async (context: ContextState) => {
         const projectPath = join(context.cwd, projectName)
 
         return (
-          !existsSync(projectPath) ||
-          readdirSync(projectPath).length === 0
-        ) ? null : 'toggle'
+          !existsSync(projectPath)
+          || readdirSync(projectPath).length === 0
+        )
+          ? null
+          : 'toggle'
       },
       onState (a) {
         if (!a.value) {
