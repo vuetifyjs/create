@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.5.2](https://github.com/vuetifyjs/create-vuetify/compare/v2.5.1...v2.5.2) (2025-05-31)
+
+* use eslint-config-vuetify v4 (#74)([#73](https://github.com/vuetifyjs/create-vuetify/issues/74)) ([53ac15b](https://github.com/vuetifyjs/create-vuetify/commit/53ac15bb749ef9b9e07e29325a0f9eaba3511d13))
+
 ## [2.5.1](https://github.com/vuetifyjs/create-vuetify/compare/v2.5.0...v2.5.1) (2025-04-27)
 
 # [2.5.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.4.0...v2.5.0) (2025-04-27)
