@@ -1,12 +1,12 @@
 export const versions = {
-  'vuetify': '^3.8.1',
-  'typescript': '^5.6.3',
-  'vue-tsc': '^2.1.6',
-  'sass-embedded': '^1.86.3',
+  'vuetify': '^3.9.0',
+  'typescript': '^5.8.3',
+  'vue-tsc': '^3.0.1',
+  'sass-embedded': '^1.89.2',
   '@vuetify/loader-shared': '^2.1.0',
   'vite-plugin-vuetify': '^2.1.1',
-  'vuetify-nuxt-module': '^0.18.6',
+  'vuetify-nuxt-module': '^0.18.7',
   'upath': '^2.0.1',
   '@mdi/font': '^7.4.47',
-  '@nuxt/fonts': '^0.11.1',
+  '@nuxt/fonts': '^0.11.4',
 } as const
