@@ -1,6 +1,8 @@
 {
+  "dependencies": {
+    "pinia" : "^3.0.3"
+  },
   "devDependencies": {
-    "pinia" : "^3.0.3",
     "unplugin-auto-import": "^19.3.0",
     "vite-plugin-vue-layouts-next": "^1.0.0"
   }
