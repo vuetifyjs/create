@@ -1,5 +1,13 @@
 # Changelog
 
+# [2.6.0](https://github.com/vuetifyjs/create-vuetify/compare/v2.5.2...v2.6.0) (2025-07-17)
+
+
+### Features
+
+* **theme:** change default theme from dark to system ([609dc7d](https://github.com/vuetifyjs/create-vuetify/commit/609dc7db9f606bf095797c13eb24a2f2b9531945))
+* update vuetify to 3.9 and bump other dependencies ([d6939f1](https://github.com/vuetifyjs/create-vuetify/commit/d6939f1ec32eecd3520175c86741593805d8f4c4))
+
 ## [2.5.2](https://github.com/vuetifyjs/create-vuetify/compare/v2.5.1...v2.5.2) (2025-05-31)
 
 * use eslint-config-vuetify v4 ([#74](https://github.com/vuetifyjs/create-vuetify/issues/74)) ([53ac15b](https://github.com/vuetifyjs/create-vuetify/commit/53ac15bb749ef9b9e07e29325a0f9eaba3511d13))
