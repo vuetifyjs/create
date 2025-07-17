@@ -3,9 +3,9 @@
     "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "eslint": "^9.23.0",
+    "eslint": "^9.30.1",
     "eslint-config-vuetify": "^4.0.0",
-    "vue-router": "^4.5.0",
-    "unplugin-vue-router": "^0.12.0"
+    "vue-router": "^4.5.1",
+    "unplugin-vue-router": "^0.14.0"
   }
 }
