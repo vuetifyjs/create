@@ -3,7 +3,7 @@
     "pinia" : "^3.0.3"
   },
   "devDependencies": {
-    "unplugin-auto-import": "^19.3.0",
+    "unplugin-auto-import": "^20.1.0",
     "vite-plugin-vue-layouts-next": "^1.0.0"
   }
 }

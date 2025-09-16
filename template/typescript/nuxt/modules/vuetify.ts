@@ -36,13 +36,6 @@ export default defineNuxtModule<ModuleOptions>({
         styles: true,
       }))
 
-      viteInlineConfig.css ??= {}
-      viteInlineConfig.css.preprocessorOptions ??= {}
-      viteInlineConfig.css.preprocessorOptions.sass ??= {}
-      viteInlineConfig.css.preprocessorOptions.sass.api = 'modern-compiler'
-      viteInlineConfig.css.preprocessorOptions.scss ??= {}
-      viteInlineConfig.css.preprocessorOptions.scss.api = 'modern-compiler'
-
       viteInlineConfig.plugins.push({
         name: 'vuetify:nuxt:styles',
         enforce: 'pre',
