@@ -18,7 +18,6 @@ export async function renderNuxtTemplate (ctx: NuxtContext) {
     cwd,
     projectName,
     projectRoot,
-    useNuxtV4Compat,
     nuxtPreset,
   } = ctx
 
@@ -26,9 +25,7 @@ export async function renderNuxtTemplate (ctx: NuxtContext) {
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm'
   const isYarn1 = pkgManager === 'yarn' && pkgInfo?.version.startsWith('1.')
 
-  const customCommand = useNuxtV4Compat
-    ? `npx nuxi@latest init -t v4-compat ${projectName}`
-    : `npm exec nuxi init ${projectName}`
+  const customCommand = `npm exec nuxi init ${projectName}`
 
   const fullCustomCommand = customCommand
     // Only Yarn 1.x doesn't support `@version` in the `create` command
@@ -166,7 +163,6 @@ function copyResources (
 ) {
   const {
     useNuxtSSR,
-    useNuxtV4Compat,
     nuxtPreset,
     useNuxtModule,
     templateRoot,
@@ -199,11 +195,11 @@ function copyResources (
   fs.mkdirSync(pluginsDir)
   if (useNuxtModule) {
     // vuetify configuration file
-    // v4 compat: modules at root => rootPath is `${rootPath}/app`
+    // v4: modules at root => rootPath is `${rootPath}/app`
     // https://nuxt.com/docs/getting-started/upgrade#migrating-to-nuxt-4
     fs.copyFileSync(
       path.join(templateDir, 'vuetify.config.ts'),
-      path.join(rootPath, useNuxtV4Compat ? '../vuetify.config.ts' : 'vuetify.config.ts'),
+      path.join(rootPath, '../vuetify.config.ts'),
     )
     // vuetify plugin
     fs.copyFileSync(
@@ -212,9 +208,8 @@ function copyResources (
     )
   } else {
     // custom vuetify nuxt module
-    // v4 compat: modules at root => rootPath is `${rootPath}/app`
-    // https://nuxt.com/docs/getting-started/upgrade#migrating-to-nuxt-4
-    const modulesDir = path.join(rootPath, useNuxtV4Compat ? '../modules' : 'modules')
+    // v4: modules at root => rootPath is `${rootPath}/app`
+    const modulesDir = path.join(rootPath, '../modules')
     const templateModulesDir = path.join(templateDir, 'modules')
     fs.mkdirSync(modulesDir)
     fs.copyFileSync(
@@ -316,15 +311,14 @@ function prepareProject (ctx: NuxtContext) {
   const {
     projectRoot,
     templatePath,
-    useNuxtV4Compat,
     useNuxtModule,
   } = ctx
-  const [rootPath, templateDir] = getPaths(projectRoot, templatePath, useNuxtV4Compat)
+  const [rootPath, templateDir] = getPaths(projectRoot, templatePath)
 
   // load nuxt config file
   // v4 compat: rootPath is `${rootPath}/app`
   // https://nuxt.com/docs/getting-started/upgrade#migrating-to-nuxt-4
-  const nuxtConfigFile = path.join(rootPath, useNuxtV4Compat ? '../nuxt.config.ts' : 'nuxt.config.ts')
+  const nuxtConfigFile = path.join(rootPath, '../nuxt.config.ts')
   const nuxtConfig = parseModule(fs.readFileSync(nuxtConfigFile, 'utf8'))
 
   // prepare nuxt config

@@ -23,7 +23,6 @@ type ContextState = {
   useEslint?: boolean
   useRouter?: boolean
   useStore?: boolean
-  useNuxtV4Compat?: boolean
   useNuxtModule?: boolean
   useNuxtSSR?: boolean
   useNuxtSSRClientHints?: boolean
@@ -39,7 +38,7 @@ type DefinedContextState = { [P in keyof ContextState]-?: ContextState[P] }
 
 async function initPrompts (context: ContextState) {
   type Answers = prompts.Answers<
-    'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtV4Compat' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
+    'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
   >
 
   if (context.usePreset) {
@@ -138,17 +137,6 @@ async function initPrompts (context: ContextState) {
         return p.startsWith('nuxt-') || context.installDependencies ? null : 'toggle'
       },
       message: 'Install Dependencies?',
-      active: 'Yes',
-      inactive: 'No',
-      initial: 'Yes',
-    },
-    {
-      name: 'useNuxtV4Compat',
-      type: (_, { usePreset }) => {
-        const p = context.usePreset ?? usePreset
-        return p.startsWith('nuxt-') ? 'toggle' : null
-      },
-      message: 'Use Nuxt v4 compatibility?',
       active: 'Yes',
       inactive: 'No',
       initial: 'Yes',

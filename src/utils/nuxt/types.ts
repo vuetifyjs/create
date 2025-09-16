@@ -5,7 +5,6 @@ export interface NuxtContext {
   templateRoot: string
   templatePath: string
   nuxtPreset: 'nuxt-base' | 'nuxt-default' | 'nuxt-essentials'
-  useNuxtV4Compat: boolean
   useNuxtModule: boolean
   useNuxtSSR: boolean
   useNuxtSSRClientHints?: boolean

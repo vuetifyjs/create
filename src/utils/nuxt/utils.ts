@@ -86,9 +86,6 @@ export function editFile (file: string, callback: (content: string) => string, d
 export function getPaths (
   rootPath: string,
   templateDir: string,
-  v4: boolean,
 ): [rootPath: string, templateDir: string] {
-  return v4
-    ? [path.join(rootPath, 'app'), templateDir]
-    : [rootPath, templateDir]
+  return [path.join(rootPath, 'app'), templateDir]
 }
