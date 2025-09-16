@@ -44,7 +44,7 @@ export function addPackageObject (
   for (const [name, value] of entry) {
     entries.push([name, value])
   }
-  for (const [k, v] of entries.sort(([a], [b]) => a.localeCompare(b))) {
+  for (const [k, v] of entries.toSorted(([a], [b]) => a.localeCompare(b))) {
     pkg[key][k] = v
   }
 }

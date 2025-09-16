@@ -10,7 +10,7 @@ function mergePkg (source: string, destination: string) {
 
   const keysToSort = ['devDependencies', 'dependencies']
   for (const k of keysToSort) {
-    mergedPkg[k] = Object.keys(mergedPkg[k]).sort().reduce((a: { [key: string]: string }, c) => (a[c] = mergedPkg[k][c], a), {})
+    mergedPkg[k] = Object.keys(mergedPkg[k]).toSorted().reduce((a: { [key: string]: string }, c) => (a[c] = mergedPkg[k][c], a), {})
   }
 
   writeFileSync(destination, JSON.stringify(mergedPkg, null, 2) + '\n')

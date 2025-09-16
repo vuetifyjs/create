@@ -37,7 +37,7 @@ const promptOptions: PromptOptions = {
 
 type DefinedContextState = { [P in keyof ContextState]-?: ContextState[P] }
 
-const initPrompts = async (context: ContextState) => {
+async function initPrompts (context: ContextState) {
   type Answers = prompts.Answers<
     'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtV4Compat' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
   >

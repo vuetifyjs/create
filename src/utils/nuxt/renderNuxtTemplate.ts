@@ -99,8 +99,7 @@ function configurePackageJson ({
     ['typecheck', 'nuxt typecheck'],
   ]
   if (nuxtPreset !== 'nuxt-default') {
-    scripts.push(['lint', 'eslint .'])
-    scripts.push(['lint:fix', 'eslint . --fix'])
+    scripts.push(['lint', 'eslint .'], ['lint:fix', 'eslint . --fix'])
   }
 
   // prepare dependencies
@@ -122,9 +121,7 @@ function configurePackageJson ({
   if (useNuxtModule) {
     devDependencies.push(['vuetify-nuxt-module', versions['vuetify-nuxt-module']])
   } else {
-    devDependencies.push(['upath', versions['upath']])
-    devDependencies.push(['@vuetify/loader-shared', versions['@vuetify/loader-shared']])
-    devDependencies.push(['vite-plugin-vuetify', versions['vite-plugin-vuetify']])
+    devDependencies.push(['upath', versions['upath']], ['@vuetify/loader-shared', versions['@vuetify/loader-shared']], ['vite-plugin-vuetify', versions['vite-plugin-vuetify']])
   }
   if (devDependencies.length > 0) {
     addPackageObject('devDependencies', devDependencies, pkg)
@@ -155,8 +152,7 @@ function configureVuetify (ctx: NuxtContext, nuxtConfig: ReturnType<typeof parse
   // - will detect @mdi/font adding to the css array
   // - will add vuetify/styles to the css array if not disabled
   if (!ctx.useNuxtModule) {
-    config.css.push('@mdi/font/css/materialdesignicons.css')
-    config.css.push('vuetify/styles')
+    config.css.push('@mdi/font/css/materialdesignicons.css', 'vuetify/styles')
   }
   // todo: add only required fonts
   addNuxtModule(nuxtConfig, '@nuxt/fonts')

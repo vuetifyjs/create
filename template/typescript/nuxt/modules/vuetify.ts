@@ -34,9 +34,7 @@ export default defineNuxtModule<ModuleOptions>({
       viteInlineConfig.plugins.push(vuetify({
         autoImport: options.autoImport,
         styles: true,
-      }))
-
-      viteInlineConfig.plugins.push({
+      }), {
         name: 'vuetify:nuxt:styles',
         enforce: 'pre',
         async configResolved (config) {
