@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vuetifyjs/create-vuetify.git"
+    "url": "git+https://github.com/vuetifyjs/create.git"
   },
   "bugs": {
-    "url": "https://github.com/vuetifyjs/create-vuetify/issues"
+    "url": "https://github.com/vuetifyjs/create/issues"
   },
   "keywords": [
     "vuetify",
