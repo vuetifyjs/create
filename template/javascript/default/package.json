@@ -14,7 +14,7 @@
     "vuetify": "^3.10.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.3",
+    "@vitejs/plugin-vue": "^6.0.1",
     "sass-embedded": "^1.92.1",
     "unplugin-fonts": "^1.4.0",
     "unplugin-vue-components": "^29.0.0",
