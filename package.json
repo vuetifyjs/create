@@ -24,7 +24,8 @@
     "start": "node ./index.js",
     "dev": "node --run build && node --run start",
     "lint": "eslint --fix .",
-    "prepublishOnly": "node --run build"
+    "prepublishOnly": "node --run build",
+    "release": "bumpp"
   },
   "dependencies": {
     "kolorist": "^1.8.0",
