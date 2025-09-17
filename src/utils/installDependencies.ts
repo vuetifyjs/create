@@ -6,7 +6,9 @@ const userAgent = process.env.npm_config_user_agent ?? ''
 
 export const packageManager = /bun/.test(userAgent)
   ? 'bun'
-  : 'pnpm'
+  : (/pnpm/.test(userAgent)
+      ? 'pnpm'
+      : 'npm')
 
 export async function installDependencies (root: string = process.cwd(), manager: 'npm' | 'pnpm' | 'yarn' | 'bun' = packageManager) {
   if (manager === 'yarn') {
