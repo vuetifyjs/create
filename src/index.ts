@@ -1,7 +1,7 @@
 // Node
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, rmSync, writeFileSync, existsSync } from 'node:fs'
 
 // Types
 import type { ContextState } from './utils/prompts'
@@ -9,40 +9,67 @@ import type { NuxtPresetName } from './utils/presets'
 
 // Utils
 import { initPrompts } from './utils/prompts'
+import { resolveNonInteractiveContext } from './utils/nonInteractivePrompts'
+import { parseCliArgs, cliOptionsToContext, getHelpText, getVersionText } from './utils/cli'
 import { red } from 'kolorist'
 import { createBanner } from './utils/banner'
-import minimist from 'minimist'
 import { installDependencies, renderTemplate } from './utils'
 import { renderNuxtTemplate } from './utils/nuxt/renderNuxtTemplate'
 
-const validPresets = ['base', 'custom', 'default', 'essentials']
-
 async function run () {
-  const argv = minimist(process.argv.slice(2), {
-    alias: {
-      typescript: ['ts'],
-    },
-  })
+  const args = process.argv.slice(2).slice()
+  const banner = createBanner()
 
-  if (argv.preset && !validPresets.includes(argv.preset)) {
-    throw new Error(`'${argv.preset}' is not a valid preset. Valid presets are: ${validPresets.join(', ')}.`)
+  if (args.length === 0) {
+    console.log(`\n${banner}\n`)
+
+    const initialContext: ContextState = {
+      canOverwrite: false,
+      cwd: process.cwd(),
+      projectName: 'vuetify-project',
+    }
+
+    const finalContext = await initPrompts(initialContext)
+
+    await createProject(finalContext)
+    return
   }
 
-  const banner = createBanner()
+  const cliOptions = parseCliArgs(args)
+
+  if (cliOptions.help) {
+    console.log(getHelpText())
+    process.exit(0)
+  }
+
+  if (cliOptions.version) {
+    console.log(getVersionText())
+    process.exit(0)
+  }
 
   console.log(`\n${banner}\n`)
 
-  const context: ContextState = {
-    canOverwrite: false,
-    cwd: process.cwd(),
-    projectName: 'vuetify-project',
-    useRouter: false,
-    useTypeScript: argv.typescript,
-    usePreset: argv.preset,
-    useStore: undefined,
-    usePackageManager: undefined,
+  const cliContext = cliOptionsToContext(cliOptions, process.cwd())
+
+  const initialContext: ContextState = {
+    cwd: cliContext.cwd!,
+    projectName: cliContext.projectName,
+    canOverwrite: cliContext.canOverwrite,
+    useTypeScript: cliContext.useTypeScript,
+    usePreset: cliContext.usePreset,
+    usePackageManager: cliContext.usePackageManager,
+    installDependencies: cliContext.installDependencies,
+    useNuxtModule: cliContext.useNuxtModule,
+    useNuxtSSR: cliContext.useNuxtSSR,
+    useNuxtSSRClientHints: cliContext.useNuxtSSRClientHints,
   }
 
+  const finalContext = resolveNonInteractiveContext(initialContext)
+
+  await createProject(finalContext)
+}
+
+async function createProject (finalContext: any) {
   const {
     canOverwrite,
     cwd,
@@ -54,16 +81,15 @@ async function run () {
     useNuxtModule,
     useNuxtSSR,
     useNuxtSSRClientHints,
-  } = await initPrompts(context)
+  } = finalContext
 
   const projectRoot = join(cwd, projectName)
 
-  if (canOverwrite) {
-    // Clean dir
+  if (canOverwrite && existsSync(projectRoot)) {
     rmSync(projectRoot, { recursive: true })
   }
 
-  const preset = context.usePreset ?? usePreset
+  const preset = finalContext.usePreset ?? usePreset
 
   if (preset.startsWith('nuxt-')) {
     const templateRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../template/typescript')

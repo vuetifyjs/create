@@ -1,16 +1,18 @@
-import { copyFileSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { copyFileSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync, existsSync } from 'node:fs'
 import { basename, dirname, resolve } from 'node:path'
 
 import { deepMerge } from './deepMerge'
 
 function mergePkg (source: string, destination: string) {
-  const target = JSON.parse(readFileSync(destination, 'utf8'))
+  const target = existsSync(destination) ? JSON.parse(readFileSync(destination, 'utf8')) : {}
   const src = JSON.parse(readFileSync(source, 'utf8'))
   const mergedPkg = deepMerge(target, src)
 
   const keysToSort = ['devDependencies', 'dependencies']
   for (const k of keysToSort) {
-    mergedPkg[k] = Object.keys(mergedPkg[k]).toSorted().reduce((a: { [key: string]: string }, c) => (a[c] = mergedPkg[k][c], a), {})
+    if (mergedPkg[k]) {
+      mergedPkg[k] = Object.keys(mergedPkg[k]).toSorted().reduce((a: { [key: string]: string }, c) => (a[c] = mergedPkg[k][c], a), {})
+    }
   }
 
   writeFileSync(destination, JSON.stringify(mergedPkg, null, 2) + '\n')
