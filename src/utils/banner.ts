@@ -15,5 +15,5 @@ export function createBanner (): string {
 }
 
 export function createPlainBanner (): string {
-  return 'Vuetify.js - Material Component Framework for Vue'
+  return 'Vuetify - Vue Component Framework'
 }
