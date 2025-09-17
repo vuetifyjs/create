@@ -20,9 +20,6 @@ type ContextState = {
   usePackageManager?: 'npm' | 'pnpm' | 'yarn' | 'bun'
   installDependencies?: boolean
   usePreset?: 'base' | 'default' | 'essentials' | 'nuxt-base' | 'nuxt-default' | 'nuxt-essentials'
-  useEslint?: boolean
-  useRouter?: boolean
-  useStore?: boolean
   useNuxtModule?: boolean
   useNuxtSSR?: boolean
   useNuxtSSRClientHints?: boolean
