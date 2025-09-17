@@ -5,10 +5,10 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "create-vuetify": "index.js"
+    "create-vuetify": "bin/index.js"
   },
   "files": [
-    "index.js",
+    "bin/index.js",
     "template",
     "dist"
   ],
