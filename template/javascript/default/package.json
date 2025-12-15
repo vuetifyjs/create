@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
-    "sass-embedded": "^1.92.1",
+    "sass-embedded": "1.93.3",
     "unplugin-fonts": "^1.4.0",
     "unplugin-vue-components": "^29.0.0",
     "vite-plugin-vuetify": "^2.1.2",
