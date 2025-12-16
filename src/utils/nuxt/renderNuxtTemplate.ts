@@ -149,7 +149,9 @@ function configureVuetify (ctx: NuxtContext, nuxtConfig: ReturnType<typeof parse
   // - will detect @mdi/font adding to the css array
   // - will add vuetify/styles to the css array if not disabled
   if (!ctx.useNuxtModule) {
-    config.css.push('@mdi/font/css/materialdesignicons.css', 'vuetify/styles')
+    config.css.push('@mdi/font/css/materialdesignicons.css')
+    // eslint-disable-next-line unicorn/prefer-single-call
+    config.css.push('vuetify/styles')
   }
   // todo: add only required fonts
   addNuxtModule(nuxtConfig, '@nuxt/fonts')
