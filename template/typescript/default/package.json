@@ -27,6 +27,6 @@
     "unplugin-vue-components": "^29.0.0",
     "vite-plugin-vuetify": "^2.1.2",
     "vite": "^7.1.5",
-    "vue-tsc": "^3.0.7"
+    "vue-tsc": "^3.2.0"
   }
 }
