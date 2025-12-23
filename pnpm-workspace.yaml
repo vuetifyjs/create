@@ -1,0 +1,4 @@
+ignoredBuiltDependencies:
+  - esbuild
+
+minimumReleaseAge: 4320
