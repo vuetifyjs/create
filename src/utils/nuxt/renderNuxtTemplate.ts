@@ -8,7 +8,7 @@ import type { NuxtContext, PackageJsonEntry } from './types'
 
 // Utils
 import { addPackageObject, detectPkgInfo, editFile, getPaths, runCommand } from './utils'
-import { versions } from './versions'
+import { versions, versionsV4 } from './versions'
 import { detect } from 'package-manager-detector'
 import { generateCode, parseModule } from 'magicast'
 import { addNuxtModule, getDefaultExportOptions } from 'magicast/helpers'
@@ -85,10 +85,12 @@ function configurePackageJson ({
   projectRoot,
   useNuxtModule,
   nuxtPreset,
+  vuetifyVersion,
 }: NuxtContext) {
   const packageJson = path.join(projectRoot, 'package.json')
   const pkg = JSON.parse(fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf8'))
   pkg.name = projectName
+  const v = vuetifyVersion === '4.x' ? versionsV4 : versions
 
   // prepare scripts
   const scripts: PackageJsonEntry[] = [
@@ -101,7 +103,7 @@ function configurePackageJson ({
 
   // prepare dependencies
   const dependencies: PackageJsonEntry[] = [
-    ['vuetify', versions.vuetify],
+    ['vuetify', v.vuetify],
   ]
   if (dependencies.length > 0) {
     addPackageObject('dependencies', dependencies, pkg)
@@ -109,16 +111,16 @@ function configurePackageJson ({
 
   // prepare devDependencies
   const devDependencies: PackageJsonEntry[] = [
-    ['@mdi/font', versions['@mdi/font']],
-    ['@nuxt/fonts', versions['@nuxt/fonts']],
-    ['sass-embedded', versions['sass-embedded']],
-    ['typescript', versions.typescript],
-    ['vue-tsc', versions['vue-tsc']],
+    ['@mdi/font', v['@mdi/font']],
+    ['@nuxt/fonts', v['@nuxt/fonts']],
+    ['sass-embedded', v['sass-embedded']],
+    ['typescript', v.typescript],
+    ['vue-tsc', v['vue-tsc']],
   ]
   if (useNuxtModule) {
-    devDependencies.push(['vuetify-nuxt-module', versions['vuetify-nuxt-module']])
+    devDependencies.push(['vuetify-nuxt-module', v['vuetify-nuxt-module']])
   } else {
-    devDependencies.push(['upath', versions['upath']], ['@vuetify/loader-shared', versions['@vuetify/loader-shared']], ['vite-plugin-vuetify', versions['vite-plugin-vuetify']])
+    devDependencies.push(['upath', v['upath']], ['@vuetify/loader-shared', v['@vuetify/loader-shared']], ['vite-plugin-vuetify', v['vite-plugin-vuetify']])
   }
   if (devDependencies.length > 0) {
     addPackageObject('devDependencies', devDependencies, pkg)

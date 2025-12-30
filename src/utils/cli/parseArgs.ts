@@ -11,6 +11,7 @@ export interface CliOptions {
   nuxtModule?: boolean
   nuxtSSR?: boolean
   nuxtSSRClientHints?: boolean
+  v4?: boolean
   help?: boolean
   version?: boolean
 }
@@ -29,6 +30,7 @@ export function parseCliArgs (args: string[]): CliOptions {
       nuxtModule: ['nuxt-module'],
       nuxtSSR: ['nuxt-ssr', 'ssr'],
       nuxtSSRClientHints: ['nuxt-ssr-client-hints', 'client-hints'],
+      v4: [],
       help: ['h'],
       version: ['v'],
     },
@@ -39,6 +41,7 @@ export function parseCliArgs (args: string[]): CliOptions {
       'nuxtModule',
       'nuxtSSR',
       'nuxtSSRClientHints',
+      'v4',
       'help',
       'version',
     ],
@@ -68,6 +71,7 @@ export function parseCliArgs (args: string[]): CliOptions {
     nuxtModule: argv.nuxtModule,
     nuxtSSR: argv.nuxtSSR,
     nuxtSSRClientHints: argv.nuxtSSRClientHints,
+    v4: argv.v4,
     help: argv.help,
     version: argv.version,
   }
@@ -85,5 +89,6 @@ export function cliOptionsToContext (cliOptions: CliOptions, cwd: string): Parti
     useNuxtModule: cliOptions.nuxtModule ?? true,
     useNuxtSSR: cliOptions.nuxtSSR ?? true,
     useNuxtSSRClientHints: cliOptions.nuxtSSRClientHints ?? (cliOptions.nuxtModule && cliOptions.nuxtSSR),
+    vuetifyVersion: cliOptions.v4 ? '4.x' : undefined,
   }
 }

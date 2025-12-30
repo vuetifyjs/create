@@ -20,6 +20,7 @@ type ContextState = {
   usePackageManager?: 'npm' | 'pnpm' | 'yarn' | 'bun'
   installDependencies?: boolean
   usePreset?: 'base' | 'default' | 'essentials' | 'nuxt-base' | 'nuxt-default' | 'nuxt-essentials'
+  vuetifyVersion?: '3.x' | '4.x'
   useNuxtModule?: boolean
   useNuxtSSR?: boolean
   useNuxtSSRClientHints?: boolean
@@ -35,7 +36,7 @@ type DefinedContextState = { [P in keyof ContextState]-?: ContextState[P] }
 
 async function initPrompts (context: ContextState) {
   type Answers = prompts.Answers<
-    'projectName' | 'canOverwrite' | 'usePreset' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
+    'projectName' | 'canOverwrite' | 'usePreset' | 'vuetifyVersion' | 'useTypeScript' | 'usePackageManager' | 'installDependencies' | 'useNuxtModule' | 'useNuxtSSR' | 'useNuxtSSRClientHints'
   >
 
   if (context.usePreset) {
@@ -98,6 +99,16 @@ async function initPrompts (context: ContextState) {
         { title: 'Nuxt Barebones (Only Vuetify)', value: 'nuxt-default' },
         { title: 'Nuxt Default (Adds Nuxt ESLint & SASS variables)', value: 'nuxt-base' },
         { title: 'Nuxt Recommended (Everything from Default. Enables auto importing & layouts)', value: 'nuxt-essentials' },
+      ],
+    },
+    {
+      name: 'vuetifyVersion',
+      type: context.vuetifyVersion ? null : 'select',
+      message: 'Which Vuetify version would you like to use?',
+      initial: 0,
+      choices: [
+        { title: 'Vuetify 3 (Stable)', value: '3.x' },
+        { title: 'Vuetify 4 (Alpha)', value: '4.x' },
       ],
     },
     {

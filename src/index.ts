@@ -1,7 +1,7 @@
 // Node
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { mkdirSync, rmSync, writeFileSync, existsSync } from 'node:fs'
+import { mkdirSync, rmSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
 
 // Types
 import type { ContextState } from './utils/prompts'
@@ -15,6 +15,7 @@ import { red } from 'kolorist'
 import { createBanner } from './utils/banner'
 import { installDependencies, renderTemplate } from './utils'
 import { renderNuxtTemplate } from './utils/nuxt/renderNuxtTemplate'
+import { versionsV4 } from './utils/nuxt/versions'
 
 async function run () {
   const args = process.argv.slice(2).slice()
@@ -62,6 +63,7 @@ async function run () {
     useNuxtModule: cliContext.useNuxtModule,
     useNuxtSSR: cliContext.useNuxtSSR,
     useNuxtSSRClientHints: cliContext.useNuxtSSRClientHints,
+    vuetifyVersion: cliContext.vuetifyVersion,
   }
 
   const finalContext = resolveNonInteractiveContext(initialContext)
@@ -105,6 +107,7 @@ async function createProject (finalContext: any) {
       useNuxtModule,
       useNuxtSSR,
       useNuxtSSRClientHints,
+      vuetifyVersion: finalContext.vuetifyVersion,
     })
   } else {
     // Create project directory
@@ -131,6 +134,17 @@ async function createProject (finalContext: any) {
     if (usePackageManager && installDeps) {
       console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
       await installDependencies(projectRoot, usePackageManager)
+    }
+
+    if (finalContext.vuetifyVersion === '4.x') {
+      const packageJsonPath = resolve(projectRoot, 'package.json')
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
+
+      if (packageJson.dependencies?.vuetify) {
+        packageJson.dependencies.vuetify = versionsV4.vuetify
+      }
+
+      writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n')
     }
   }
 

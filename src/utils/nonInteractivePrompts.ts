@@ -54,6 +54,7 @@ export function resolveNonInteractiveContext (context: ContextState): DefinedCon
   const useNuxtModule = context.useNuxtModule
   const useNuxtSSR = context.useNuxtSSR
   const useNuxtSSRClientHints = context.useNuxtSSRClientHints
+  const vuetifyVersion = context.vuetifyVersion
 
   return {
     cwd: context.cwd,
@@ -66,5 +67,6 @@ export function resolveNonInteractiveContext (context: ContextState): DefinedCon
     useNuxtModule: useNuxtModule || false,
     useNuxtSSR: useNuxtSSR || false,
     useNuxtSSRClientHints: useNuxtSSRClientHints || false,
+    vuetifyVersion: vuetifyVersion || '3.x',
   }
 }

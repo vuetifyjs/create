@@ -13,6 +13,7 @@ Options:
   --nuxt-module                      Use vuetify-nuxt-module (for Nuxt presets)
   --nuxt-ssr, --ssr                  Enable Nuxt SSR (for Nuxt presets)
   --nuxt-ssr-client-hints            Enable Nuxt SSR Client Hints (for Nuxt presets)
+  --v4                               Use Vuetify 4 (Alpha)
   -h, --help                         Show help
   -v, --version                      Show version
 

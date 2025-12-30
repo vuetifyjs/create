@@ -8,6 +8,7 @@ export interface NuxtContext {
   useNuxtModule: boolean
   useNuxtSSR: boolean
   useNuxtSSRClientHints?: boolean
+  vuetifyVersion?: '3.x' | '4.x'
 }
 
 export type PackageJsonEntry = [name: string, value: string]

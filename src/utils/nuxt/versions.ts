@@ -10,3 +10,8 @@ export const versions = {
   '@mdi/font': '^7.4.47',
   '@nuxt/fonts': '^0.11.4',
 } as const
+
+export const versionsV4 = {
+  ...versions,
+  vuetify: '^4.0.0-alpha.1',
+} as const
