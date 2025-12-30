@@ -1,5 +1,5 @@
 import { copyFileSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync, existsSync } from 'node:fs'
-import { basename, dirname, resolve } from 'node:path'
+import { basename, dirname, extname, resolve } from 'node:path'
 
 import { deepMerge } from './deepMerge'
 
@@ -18,32 +18,49 @@ function mergePkg (source: string, destination: string) {
   writeFileSync(destination, JSON.stringify(mergedPkg, null, 2) + '\n')
 }
 
-function renderDirectory (source: string, destination: string) {
+export type RenderOptions = {
+  replace?: Record<string, string>
+}
+
+function renderDirectory (source: string, destination: string, options?: RenderOptions) {
   mkdirSync(destination, { recursive: true })
 
   for (const path of readdirSync(source)) {
-    renderTemplate(resolve(source, path), resolve(destination, path))
+    renderTemplate(resolve(source, path), resolve(destination, path), options)
   }
 }
 
-function renderFile (source: string, destination: string) {
+const binaryExtensions = new Set(['.png', '.jpg', '.jpeg', '.gif', '.ico', '.woff', '.woff2', '.ttf', '.eot', '.svg'])
+
+function renderFile (source: string, destination: string, options?: RenderOptions) {
   const filename = basename(source)
 
   if (filename.startsWith('_')) {
     destination = resolve(dirname(destination), filename.replace('_', '.'))
   }
+
   if (filename === 'package.json') {
     mergePkg(source, destination)
-  } else {
-    copyFileSync(source, destination)
+    return
   }
+
+  if (options?.replace && !binaryExtensions.has(extname(filename))) {
+    let content = readFileSync(source, 'utf8')
+    for (const [key, value] of Object.entries(options.replace)) {
+      content = content.replaceAll(key, value)
+    }
+    writeFileSync(destination, content)
+    return
+  }
+
+  copyFileSync(source, destination)
 }
 
-function renderTemplate (source: string, destination: string) {
+function renderTemplate (source: string, destination: string, options?: RenderOptions) {
   if (statSync(source).isDirectory()) {
-    renderDirectory(source, destination)
+    renderDirectory(source, destination, options)
   } else {
-    renderFile(source, destination)
+    renderFile(source, destination, options)
   }
 }
 

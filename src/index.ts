@@ -121,14 +121,18 @@ async function createProject (finalContext: any) {
     const jsOrTs = useTypeScript ? 'typescript' : 'javascript'
     const templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template', jsOrTs)
 
-    renderTemplate(resolve(templatePath, 'default'), projectRoot)
+    const replace = {
+      '{{VUETIFY_VERSION}}': finalContext.vuetifyVersion === '4.x' ? '4 (Alpha)' : '3',
+    }
+
+    renderTemplate(resolve(templatePath, 'default'), projectRoot, { replace })
 
     if (['base', 'essentials'].includes(usePreset)) {
-      renderTemplate(resolve(templatePath, 'base'), projectRoot)
+      renderTemplate(resolve(templatePath, 'base'), projectRoot, { replace })
     }
 
     if (['essentials', 'recommended'].includes(usePreset)) {
-      renderTemplate(resolve(templatePath, 'essentials'), projectRoot)
+      renderTemplate(resolve(templatePath, 'essentials'), projectRoot, { replace })
     }
 
     if (usePackageManager && installDeps) {
