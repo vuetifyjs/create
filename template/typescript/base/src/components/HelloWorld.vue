@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height" max-width="900">
+  <v-container class="fill-height d-flex align-center" max-width="900">
     <div>
       <v-img
         class="mb-4"
@@ -9,7 +9,7 @@
 
       <div class="mb-8 text-center">
         <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
-        <h1 class="text-h2 font-weight-bold">Vuetify</h1>
+        <h1 class="text-h2 my-0 font-weight-bold">Vuetify</h1>
       </div>
 
       <v-row>
