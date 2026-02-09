@@ -135,11 +135,6 @@ async function createProject (finalContext: any) {
       renderTemplate(resolve(templatePath, 'essentials'), projectRoot, { replace })
     }
 
-    if (usePackageManager && installDeps) {
-      console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
-      await installDependencies(projectRoot, usePackageManager)
-    }
-
     if (finalContext.vuetifyVersion === '4.x') {
       const packageJsonPath = resolve(projectRoot, 'package.json')
       const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
@@ -149,6 +144,11 @@ async function createProject (finalContext: any) {
       }
 
       writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n')
+    }
+
+    if (usePackageManager && installDeps) {
+      console.log(`◌ Installing dependencies with ${usePackageManager}...\n`)
+      await installDependencies(projectRoot, usePackageManager)
     }
   }
 
