@@ -122,7 +122,7 @@ async function createProject (finalContext: any) {
     const templatePath = resolve(dirname(fileURLToPath(import.meta.url)), '../template', jsOrTs)
 
     const replace = {
-      '{{VUETIFY_VERSION}}': finalContext.vuetifyVersion === '4.x' ? '4 (Alpha)' : '3',
+      '{{VUETIFY_VERSION}}': finalContext.vuetifyVersion === '4.x' ? '4 (Beta)' : '3',
     }
 
     renderTemplate(resolve(templatePath, 'default'), projectRoot, { replace })

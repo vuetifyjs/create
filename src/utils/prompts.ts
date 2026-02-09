@@ -108,7 +108,7 @@ async function initPrompts (context: ContextState) {
       initial: 0,
       choices: [
         { title: 'Vuetify 3 (Stable)', value: '3.x' },
-        { title: 'Vuetify 4 (Alpha)', value: '4.x' },
+        { title: 'Vuetify 4 (Beta)', value: '4.x' },
       ],
     },
     {

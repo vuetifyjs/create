@@ -13,5 +13,5 @@ export const versions = {
 
 export const versionsV4 = {
   ...versions,
-  vuetify: '^4.0.0-alpha.1',
+  vuetify: '^4.0.0-beta.1',
 } as const
