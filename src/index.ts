@@ -12,7 +12,7 @@ import { initPrompts } from './utils/prompts'
 import { resolveNonInteractiveContext } from './utils/nonInteractivePrompts'
 import { parseCliArgs, cliOptionsToContext, getHelpText, getVersionText } from './utils/cli'
 import { red } from 'kolorist'
-import { createBanner } from './utils/banner'
+import { createBanner, createBetaBanner } from './utils/banner'
 import { installDependencies, renderTemplate } from './utils'
 import { renderNuxtTemplate } from './utils/nuxt/renderNuxtTemplate'
 import { versionsV4 } from './utils/nuxt/versions'
@@ -20,9 +20,10 @@ import { versionsV4 } from './utils/nuxt/versions'
 async function run () {
   const args = process.argv.slice(2).slice()
   const banner = createBanner()
+  const betaBanner = createBetaBanner()
 
   if (args.length === 0) {
-    console.log(`\n${banner}\n`)
+    console.log(`\n${banner}\n${betaBanner}`)
 
     const initialContext: ContextState = {
       canOverwrite: false,
@@ -48,7 +49,7 @@ async function run () {
     process.exit(0)
   }
 
-  console.log(`\n${banner}\n`)
+  console.log(`\n${banner}\n${betaBanner}`)
 
   const cliContext = cliOptionsToContext(cliOptions, process.cwd())
 

@@ -1,4 +1,6 @@
 import { blue } from 'kolorist'
+import { getUserAgent } from 'package-manager-detector'
+import { box } from 'consola/utils'
 
 function supportsColor (): boolean {
   const testText = 'test'
@@ -16,4 +18,9 @@ export function createBanner (): string {
 
 export function createPlainBanner (): string {
   return 'Vuetify - Vue Component Framework'
+}
+
+export function createBetaBanner () {
+  const packageManager = getUserAgent()
+  return box(`${packageManager ?? 'npm'} create vuetify@beta`, { title: 'Try new vuetify-create with better customization and presets support!', style: { borderColor: 'blueBright' } })
 }
