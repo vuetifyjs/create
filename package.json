@@ -1,6 +1,6 @@
 {
   "name": "create-vuetify",
-  "version": "2.8.0-beta.1",
+  "version": "2.8.0",
   "author": "Elijah Kotyluk <elijah@elijahkotyluk.com>",
   "license": "MIT",
   "type": "module",
