@@ -5,9 +5,12 @@
   </picture>
 </p>
 
-[![npm version](https://img.shields.io/npm/v/create-vuetify.svg)](https://www.npmjs.com/package/create-vuetify)
-[![npm downloads](https://img.shields.io/npm/dm/create-vuetify?color=blue)](https://npm.chart.dev/create-vuetify)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <a href="https://www.npmjs.com/package/create-vuetify"><img src="https://img.shields.io/npm/v/create-vuetify.svg" alt="npm version"></a>
+  <a href="https://npm.chart.dev/create-vuetify"><img src="https://img.shields.io/npm/dm/create-vuetify?color=blue" alt="npm downloads"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://community.vuetifyjs.com"><img src="https://discordapp.com/api/guilds/340160225338195969/widget.png" alt="Discord"></a>
+</p>
 
 Scaffold your next Vuetify application
 
