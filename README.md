@@ -1,3 +1,6 @@
+> [!WARNING]
+> The development was moved to https://github.com/vuetifyjs/cli/ repository - please raise new issues, discussions and pull requests there 🙏
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://cdn.vuetifyjs.com/docs/images/logos/vcreate-logo-dark.png">
