@@ -8,7 +8,7 @@ This is the official scaffolding tool for Vuetify, designed to give you a head s
 - 🚨 [Issues](https://issues.vuetifyjs.com/)
 - 🏬 [Store](https://store.vuetifyjs.com/)
 - 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+- 💬 [Discord](https://discord.gg/vuetify)
 
 ## 💿 Install
 
